@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/fumisoro/AudioVisualController/issues"
   },
-  "homepage": "https://github.com/fumisoro/AudioVisualController#readme"
+  "homepage": "https://github.com/fumisoro/AudioVisualController#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
