@@ -1,0 +1,3 @@
+-input mic
+-gram tmp
+-h /home/pi/AudioVisualController/node_modules/julius/model/phone_m/hmmdefs_monof_mix16_gid.binhmm
