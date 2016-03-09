@@ -5,6 +5,7 @@ var Julius = require('julius'),
 
 grammar.add("つぎ");
 grammar.add("まえ");
+grammar.add("ストップ");
 
 
 var HOST = '192.168.11.3';
@@ -50,11 +51,15 @@ grammar.compile(function(err, result){
     // 認識結果を str で返す
     julius.on('result', function(str) {
         console.log('認識結果:', str);
-        if (str=="つぎ"){
-            client.write('DSKF    \n');
-        }
-        if (str=="まえ"){
-            client.write('DSKB    \n');
+        switch (str){
+            case "つぎ":
+                client.write('DSKF    \n');
+                break;
+            case "まえ":
+                client.write('DSKB    \n');
+                break;
+            case "ストップ":
+                client.write('DPUS    \n');
         }
     });
 
