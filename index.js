@@ -5,7 +5,10 @@ var Julius = require('julius'),
 
 grammar.add("つぎ");
 grammar.add("まえ");
-grammar.add("ストップ");
+grammar.add("停止");
+grammar.add("再生");
+grammar.add("早送り");
+grammar.add("早戻し");
 
 
 var HOST = '192.168.11.3';
@@ -58,8 +61,18 @@ grammar.compile(function(err, result){
             case "まえ":
                 client.write('DSKB    \n');
                 break;
-            case "ストップ":
+            case "停止":
                 client.write('DPUS    \n');
+                break;
+            case "再生":
+                client.write('DPLY    \n');
+                break;
+            case "早送り":
+                client.write('DFWD    \n');
+                break;
+            case "早戻し":
+                client.write('DREV    \n');
+                break;
         }
     });
 
