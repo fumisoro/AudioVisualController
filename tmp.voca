@@ -5,22 +5,34 @@
 % NOISE
 <sp>	sp
 % WORD_0
-つぎ	 ts u g i
+チャプターつぎ	 ch a p u t a: ts u g i
 % WORD_1
-まえ	 m a e
+チャプターまえ	 ch a p u t a: m a e
 % WORD_2
-停止	 t e: sh i
-% WORD_3
 再生	 s a i s e:
-% WORD_4
+% WORD_3
 早送り	 h a y a o k u r i
-% WORD_5
+% WORD_4
 巻戻し	 m a k i m o d o sh i
+% WORD_5
+ブルーレイ	 b u r u: r e:
 % WORD_6
-ブルーレイ操作	 b u r u: r e: s o: s a
+停止	 t e: sh i
 % WORD_7
-スイッチおきて	 s u i q ch i o k i t e
+テレビ	 t e r e b i
 % WORD_8
-スイッチばいばい	 s u i q ch i b a i b a i
+チャンネルつぎ	 ch a N n e r u ts u g i
 % WORD_9
+チャンネルまえ	 ch a N n e r u m a e
+% WORD_10
+音量だい	 o N ry o: d a i
+% WORD_11
+音量しょう	 o N ry o: sh o:
+% WORD_12
+入力切り換え	 ny u: ry o k u k i r i k a e
+% WORD_13
+起動	 k i d o:
+% WORD_14
+電源オフ	 d e N g e N o f u
+% WORD_15
 操作終了	 s o: s a sh u: ry o:

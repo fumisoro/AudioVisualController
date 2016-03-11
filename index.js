@@ -129,11 +129,11 @@ grammar.compile(function(err, result){
                     case "電源オフ":
                         blueClient.write('POWR0   \n');
                         break;
-                    case "操作ストップ":
+                    case "操作終了":
                         bootTime.setSeconds(bootTime.getSeconds() - 10);
                         break;
                 }
-            } else if(operationMode == "tv"){
+            } else if(operationMode === "tv"){
                 switch(str){
                     case "チャンネルつぎ":
                         tvClient.write('CHUP    \n');
@@ -150,7 +150,7 @@ grammar.compile(function(err, result){
                     case "電源オフ":
                         tvClient.write('POWR0   \n');
                         break;
-                    case "操作ストップ":
+                    case "操作終了":
                         bootTime.setSeconds(bootTime.getSeconds() - 10);
                         break;
                 }

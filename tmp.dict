@@ -1,13 +1,19 @@
 0	[<s>]	silB
 1	[<s>]	silE
 2	[<sp>]	sp
-3	[つぎ]	ts u g i
-4	[まえ]	m a e
-5	[停止]	t e: sh i
-6	[再生]	s a i s e:
-7	[早送り]	h a y a o k u r i
-8	[巻戻し]	m a k i m o d o sh i
-9	[ブルーレイ操作]	b u r u: r e: s o: s a
-10	[スイッチおきて]	s u i q ch i o k i t e
-11	[スイッチばいばい]	s u i q ch i b a i b a i
-12	[操作終了]	s o: s a sh u: ry o:
+3	[チャプターつぎ]	ch a p u t a: ts u g i
+4	[チャプターまえ]	ch a p u t a: m a e
+5	[再生]	s a i s e:
+6	[早送り]	h a y a o k u r i
+7	[巻戻し]	m a k i m o d o sh i
+8	[ブルーレイ]	b u r u: r e:
+9	[停止]	t e: sh i
+10	[テレビ]	t e r e b i
+11	[チャンネルつぎ]	ch a N n e r u ts u g i
+12	[チャンネルまえ]	ch a N n e r u m a e
+13	[音量だい]	o N ry o: d a i
+14	[音量しょう]	o N ry o: sh o:
+15	[入力切り換え]	ny u: ry o k u k i r i k a e
+16	[起動]	k i d o:
+17	[電源オフ]	d e N g e N o f u
+18	[操作終了]	s o: s a sh u: ry o:
