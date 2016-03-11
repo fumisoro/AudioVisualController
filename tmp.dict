@@ -6,4 +6,8 @@
 5	[停止]	t e: sh i
 6	[再生]	s a i s e:
 7	[早送り]	h a y a o k u r i
-8	[早戻し]	h a y a m o d o sh i
+8	[巻戻し]	m a k i m o d o sh i
+9	[ブルーレイ操作]	b u r u: r e: s o: s a
+10	[スイッチおきて]	s u i q ch i o k i t e
+11	[スイッチばいばい]	s u i q ch i b a i b a i
+12	[操作終了]	s o: s a sh u: ry o:
