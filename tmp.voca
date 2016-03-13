@@ -9,30 +9,32 @@
 % WORD_1
 チャプターまえ	 ch a p u t a: m a e
 % WORD_2
-再生	 s a i s e:
+再生終了	 s a i s e: sh u: ry o:
 % WORD_3
-早送り	 h a y a o k u r i
+再生	 s a i s e:
 % WORD_4
-巻戻し	 m a k i m o d o sh i
+早送り	 h a y a o k u r i
 % WORD_5
-ブルーレイ	 b u r u: r e:
+巻戻し	 m a k i m o d o sh i
 % WORD_6
-停止	 t e: sh i
+ブルーレイ	 b u r u: r e:
 % WORD_7
-テレビ	 t e r e b i
+停止	 t e: sh i
 % WORD_8
-チャンネルつぎ	 ch a N n e r u ts u g i
+テレビ	 t e r e b i
 % WORD_9
-チャンネルまえ	 ch a N n e r u m a e
+チャンネルつぎ	 ch a N n e r u ts u g i
 % WORD_10
-音量だい	 o N ry o: d a i
+チャンネルまえ	 ch a N n e r u m a e
 % WORD_11
-音量しょう	 o N ry o: sh o:
+音量だい	 o N ry o: d a i
 % WORD_12
-入力切り換え	 ny u: ry o k u k i r i k a e
+音量しょう	 o N ry o: sh o:
 % WORD_13
-起動	 k i d o:
+入力切り換え	 ny u: ry o k u k i r i k a e
 % WORD_14
-電源オフ	 d e N g e N o f u
+起動	 k i d o:
 % WORD_15
+電源オフ	 d e N g e N o f u
+% WORD_16
 操作終了	 s o: s a sh u: ry o:

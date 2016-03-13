@@ -3,17 +3,18 @@
 2	[<sp>]	sp
 3	[チャプターつぎ]	ch a p u t a: ts u g i
 4	[チャプターまえ]	ch a p u t a: m a e
-5	[再生]	s a i s e:
-6	[早送り]	h a y a o k u r i
-7	[巻戻し]	m a k i m o d o sh i
-8	[ブルーレイ]	b u r u: r e:
-9	[停止]	t e: sh i
-10	[テレビ]	t e r e b i
-11	[チャンネルつぎ]	ch a N n e r u ts u g i
-12	[チャンネルまえ]	ch a N n e r u m a e
-13	[音量だい]	o N ry o: d a i
-14	[音量しょう]	o N ry o: sh o:
-15	[入力切り換え]	ny u: ry o k u k i r i k a e
-16	[起動]	k i d o:
-17	[電源オフ]	d e N g e N o f u
-18	[操作終了]	s o: s a sh u: ry o:
+5	[再生終了]	s a i s e: sh u: ry o:
+6	[再生]	s a i s e:
+7	[早送り]	h a y a o k u r i
+8	[巻戻し]	m a k i m o d o sh i
+9	[ブルーレイ]	b u r u: r e:
+10	[停止]	t e: sh i
+11	[テレビ]	t e r e b i
+12	[チャンネルつぎ]	ch a N n e r u ts u g i
+13	[チャンネルまえ]	ch a N n e r u m a e
+14	[音量だい]	o N ry o: d a i
+15	[音量しょう]	o N ry o: sh o:
+16	[入力切り換え]	ny u: ry o k u k i r i k a e
+17	[起動]	k i d o:
+18	[電源オフ]	d e N g e N o f u
+19	[操作終了]	s o: s a sh u: ry o:
