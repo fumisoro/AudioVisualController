@@ -57,12 +57,12 @@ tvClient.on('end', function(){
     console.log('tvClient disconnected');
 });
 
-blueClient.on('connect', function(had_error){
-    console.log('blueClient connect: '+had_error);
+blueClient.on('connect', function(){
+    console.log('blueClient connect');
 });
 
-tvClient.on('connect', function(had_error){
-    console.log('tvClient connect: '+had_error);
+tvClient.on('connect', function(){
+    console.log('tvClient connect');
 });
 
 blueClient.on('timeout', function(){
