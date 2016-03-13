@@ -150,7 +150,7 @@ grammar.compile(function(err, result){
     julius.on('result', function(str) {
         console.log('認識結果:', str);
         var time = new Date();
-        if(time.getTime() - bootTime.getTime() > 50000){
+        if(time.getTime() - bootTime.getTime() > 10000){
             switch (str){
                 case "ブルーレイ":
                     bootTime = new Date();
