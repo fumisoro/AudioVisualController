@@ -1,32 +1,48 @@
 var Julius = require('julius'),
     grammar = new Julius.Grammar(),
-    Net = require('net');
+    Net = require('net'),
+    __ = require('underscore');
 
+var bluRayStr = "ブルーレイ"
+    blueRayKeyword = {
+        chapterNextStr: "チャプターつぎ",
+        chapterBeforeStr: "チャプターまえ",
+        endPlayStr: "再生終了",
+        playStr: "再生",
+        fastForwardStr: "早送り",
+        rewindStr: "巻き戻し",
+        stopPlayStr: "停止",
+        onStr: "起動",
+        offStr: "電源オフ",
+        closeStr: "操作終了"
+    }
 
-grammar.add("チャプターつぎ");
-grammar.add("チャプターまえ");
-grammar.add("再生終了");
-grammar.add("再生");
-grammar.add("早送り");
-grammar.add("巻戻し");
-grammar.add("ブルーレイ");
-grammar.add("停止");
-// grammar.add("うえ移動");
-// grammar.add("した移動");
+__.each(blueRayKeyword, function(value, key){
+    blueRayKeyword[key] = bluRayStr + value;
+    grammar.add(blueRayKeyword[key]);
+    console.log(blueRayKeyword[key]);
+});
 
+var tvStr = "テレビ"
+    tvKeyword = {
+        channelNextStr: "チャンネルつぎ",
+        channelBeforeStr: "チャンネルまえ",
+        volumeUpStr: "音量だい",
+        volumeDownStr: "音量しょう",
+        modeChangeStr: "入力切り換え",
+        wiiUStr: "うぃーゆー",
+        ps4Str: "ぴーえすふぉー",
+        onStr: "起動",
+        offStr: "電源オフ",
+        tvStr: "テレビ",
+        closeStr: "操作終了"
+    }
 
-grammar.add("テレビ");
-grammar.add("チャンネルつぎ");
-grammar.add("チャンネルまえ");
-grammar.add("音量だい");
-grammar.add("音量しょう");
-grammar.add("入力切り換え");
-grammar.add("うぃーゆー");
-grammar.add("ピーエスフォー");
-
-grammar.add("起動");
-grammar.add("電源オフ");
-grammar.add("操作終了");
+__.each(tvKeyword, function(value, key){
+    tvKeyword[key] = tvStr + value;
+    grammar.add(tvKeyword[key]);
+    console.log(tvKeyword[key]);
+})
 
 var volume = 20;
 
@@ -153,121 +169,93 @@ grammar.compile(function(err, result){
     julius.on('result', function(str) {
         console.log('認識結果:', str);
         var time = new Date();
-        if(time.getTime() - bootTime.getTime() > 30000){
-            switch (str){
-                case "ブルーレイ":
-                    bootTime = new Date();
-                    operationMode = "blue";
-                    break;
-                case "テレビ":
-                    bootTime = new Date();
-                    operationMode = "tv";
-                    break;
-            }
-        }else{
-            if (operationMode === "blue"){
-                console.log("MODE blue");
-                switch (str){
-                    case "うえ移動":
-                        blueClient.write("UP      \n");
-                        bootTime = new Date();
-                        break;
-                    case "した移動":
-                        blueClient.write("DW      \n");
-                        bootTime = new Date();
-                        break;
-                    case "チャプターつぎ":
-                        blueClient.write('DSKF    \n');
-                        bootTime = new Date();
-                        break;
-                    case "チャプターまえ":
-                        blueClient.write('DSKB    \n');
-                        bootTime = new Date();
-                        break;
-                    case "停止":
-                        blueClient.write('DPUS    \n');
-                        bootTime = new Date();
-                        break;
-                    case "再生":
-                        blueClient.write('DPLY    \n');
-                        bootTime = new Date();
-                        break;
-                    case "再生終了":
-                        blueClient.write('DSTP    \n');
-                        bootTime = new Date();
-                        break;
-                    case "早送り":
-                        blueClient.write('DFWD    \n');
-                        bootTime = new Date();
-                        break;
-                    case "巻戻し":
-                        blueClient.write('DREV    \n');
-                        bootTime = new Date();
-                        break;
-                    case "起動":
-                        blueClient.write('POWR1   \n');
-                        break;
-                    case "電源オフ":
-                        blueClient.write('POWR0   \n');
-                        break;
-                    case "操作終了":
-                        bootTime.setSeconds(bootTime.getSeconds() - 60);
-                        break;
-                    case "テレビ":
-                        bootTime = new Date();
-                        operationMode = "tv";
-                        break;
-                }
-            } else if(operationMode === "tv"){
-                console.log("MODE tv");
-                switch(str){
-                    case "チャンネルつぎ":
-                        tvClient.write('CHUP    \n');
-                        bootTime = new Date();
-                        break;
-                    case "チャンネルまえ":
-                        tvClient.write('CHDW    \n');
-                        bootTime = new Date();
-                        break;
-                    case "入力切り換え":
-                        tvClient.write('ITGD    \n');
-                        bootTime = new Date();
-                        break;
-                    case "うぃーゆー":
-                    case "ピーエスフォー":
-                        tvClient.write('IAVD3   \n');
-                        bootTime = new Date();
-                        break;
-                    case "テレビ":
-                        tvClient.write('ITVD    \n');
-                        break;
-                    case "起動":
-                        tvClient.write('POWR1   \n');
-                        break;
-                    case "電源オフ":
-                        tvClient.write('POWR0   \n');
-                        break;
-                    case "操作終了":
-                        bootTime.setSeconds(bootTime.getSeconds() - 100);
-                        break;
-                    case "音量だい":
-                        volume += 1;
-                        console.log(volume);
-                        tvClient.write("VOLM"+volume+"  \n");
-                        bootTime = new Date();
-                        break;
-                    case "音量しょう":
-                        volume -= 1;
-                        console.log(volume);
-                        tvClient.write("VOLM"+volume+"  \n");
-                        bootTime = new Date();
-                        break
-                    case "ブルーレイ":
-                        bootTime = new Date();
-                        operationMode = "blue";
-                        break;
-                }
-            }
+        switch (str){
+            case "うえ移動":
+                blueClient.write("UP      \n");
+                bootTime = new Date();
+                break;
+            case "した移動":
+                blueClient.write("DW      \n");
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["chapterNextStr"]:
+                blueClient.write('DSKF    \n');
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["chapterBeforeStr"]:
+                blueClient.write('DSKB    \n');
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["stopPlayStr"]:
+                blueClient.write('DPUS    \n');
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["playStr"]:
+                blueClient.write('DPLY    \n');
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["endPlayStr"]:
+                blueClient.write('DSTP    \n');
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["fastForwardStr"]:
+                blueClient.write('DFWD    \n');
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["rewindStr"]:
+                blueClient.write('DREV    \n');
+                bootTime = new Date();
+                break;
+            case blueRayKeyword["onStr"]:
+                blueClient.write('POWR1   \n');
+                break;
+            case blueRayKeyword["offStr"]:
+                blueClient.write('POWR0   \n');
+                break;
+            case blueRayKeyword["closeStr"]:
+                bootTime.setSeconds(bootTime.getSeconds() - 60);
+                break;
+            case tvKeyword["channelNextStr"]:
+                tvClient.write('CHUP    \n');
+                bootTime = new Date();
+                break;
+            case tvKeyword["channelBeforeStr"]:
+                tvClient.write('CHDW    \n');
+                bootTime = new Date();
+                break;
+            case tvKeyword["modeChangeStr"]:
+                tvClient.write('ITGD    \n');
+                bootTime = new Date();
+                break;
+            case tvKeyword["wiiUStr"]:
+            case tvKeyword["ps4Str"]:
+                tvClient.write('IAVD3   \n');
+                bootTime = new Date();
+                break;
+            case tvKeyword["tvStr"]:
+                tvClient.write('ITVD    \n');
+                break;
+            case tvKeyword["onStr"]:
+                tvClient.write('POWR1   \n');
+                break;
+            case tvKeyword["offStr"]:
+                tvClient.write('POWR0   \n');
+                break;
+            case tvKeyword["closeStr"]:
+                bootTime.setSeconds(bootTime.getSeconds() - 100);
+                break;
+            case tvKeyword["volumeUpStr"]:
+                volume += 1;
+                console.log(volume);
+                tvClient.write("VOLM"+volume+"  \n");
+                bootTime = new Date();
+                break;
+            case tvKeyword["volumeDownStr"]:
+                volume -= 1;
+                console.log(volume);
+                tvClient.write("VOLM"+volume+"  \n");
+                bootTime = new Date();
+                break;
         }
     });
 

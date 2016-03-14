@@ -1,20 +1,24 @@
 0	[<s>]	silB
 1	[<s>]	silE
 2	[<sp>]	sp
-3	[チャプターつぎ]	ch a p u t a: ts u g i
-4	[チャプターまえ]	ch a p u t a: m a e
-5	[再生終了]	s a i s e: sh u: ry o:
-6	[再生]	s a i s e:
-7	[早送り]	h a y a o k u r i
-8	[巻戻し]	m a k i m o d o sh i
-9	[ブルーレイ]	b u r u: r e:
-10	[停止]	t e: sh i
-11	[テレビ]	t e r e b i
-12	[チャンネルつぎ]	ch a N n e r u ts u g i
-13	[チャンネルまえ]	ch a N n e r u m a e
-14	[音量だい]	o N ry o: d a i
-15	[音量しょう]	o N ry o: sh o:
-16	[入力切り換え]	ny u: ry o k u k i r i k a e
-17	[起動]	k i d o:
-18	[電源オフ]	d e N g e N o f u
-19	[操作終了]	s o: s a sh u: ry o:
+3	[ブルーレイチャプターつぎ]	b u r u: r e: ch a p u t a: ts u g i
+4	[ブルーレイチャプターまえ]	b u r u: r e: ch a p u t a: m a e
+5	[ブルーレイ再生終了]	b u r u: r e: s a i s e: sh u: ry o:
+6	[ブルーレイ再生]	b u r u: r e: s a i s e:
+7	[ブルーレイ早送り]	b u r u: r e: h a y a o k u r i
+8	[ブルーレイ巻き戻し]	b u r u: r e: m a k i m o d o sh i
+9	[ブルーレイ停止]	b u r u: r e: t e: sh i
+10	[ブルーレイ起動]	b u r u: r e: k i d o:
+11	[ブルーレイ電源オフ]	b u r u: r e: d e N g e N o f u
+12	[ブルーレイ操作終了]	b u r u: r e: s o: s a sh u: ry o:
+13	[テレビチャンネルつぎ]	t e r e b i ch a N n e r u ts u g i
+14	[テレビチャンネルまえ]	t e r e b i ch a N n e r u m a e
+15	[テレビ音量だい]	t e r e b i o N ry o: d a i
+16	[テレビ音量しょう]	t e r e b i o N ry o: sh o:
+17	[テレビ入力切り換え]	t e r e b i ny u: ry o k u k i r i k a e
+18	[テレビうぃーゆー]	t e r e b i w i: y u:
+19	[テレビぴーえすふぉー]	t e r e b i p i: e s u f o:
+20	[テレビ起動]	t e r e b i k i d o:
+21	[テレビ電源オフ]	t e r e b i d e N g e N o f u
+22	[テレビテレビ]	t e r e b i t e r e b i
+23	[テレビ操作終了]	t e r e b i s o: s a sh u: ry o:
