@@ -14,12 +14,15 @@ grammar.add("停止");
 // grammar.add("うえ移動");
 // grammar.add("した移動");
 
+
 grammar.add("テレビ");
 grammar.add("チャンネルつぎ");
 grammar.add("チャンネルまえ");
 grammar.add("音量だい");
 grammar.add("音量しょう");
 grammar.add("入力切り換え");
+grammar.add("うぃーゆー");
+grammar.add("ピーエスフォー");
 
 grammar.add("起動");
 grammar.add("電源オフ");
@@ -37,10 +40,10 @@ blueClient.setKeepAlive(true);
 tvClient.setKeepAlive(true);
 
 tvClient.connect(PORT, TVHOST, function(){
-        console.log('CONNECTED TO: ' + TVHOST + ':' + PORT+" TV");
-        tvClient.write('aquos\n');
-        tvClient.write('pass\n');
-    });
+    console.log('CONNECTED TO: ' + TVHOST + ':' + PORT+" TV");
+    tvClient.write('aquos\n');
+    tvClient.write('pass\n');
+});
 
 blueClient.connect(PORT, BDHOST, function() {
     console.log('CONNECTED TO: ' + BDHOST + ':' + PORT+" BD");
@@ -150,7 +153,7 @@ grammar.compile(function(err, result){
     julius.on('result', function(str) {
         console.log('認識結果:', str);
         var time = new Date();
-        if(time.getTime() - bootTime.getTime() > 10000){
+        if(time.getTime() - bootTime.getTime() > 30000){
             switch (str){
                 case "ブルーレイ":
                     bootTime = new Date();
@@ -208,7 +211,7 @@ grammar.compile(function(err, result){
                         blueClient.write('POWR0   \n');
                         break;
                     case "操作終了":
-                        bootTime.setSeconds(bootTime.getSeconds() - 10);
+                        bootTime.setSeconds(bootTime.getSeconds() - 60);
                         break;
                     case "テレビ":
                         bootTime = new Date();
@@ -230,6 +233,14 @@ grammar.compile(function(err, result){
                         tvClient.write('ITGD    \n');
                         bootTime = new Date();
                         break;
+                    case "うぃーゆー":
+                    case "ピーエスフォー":
+                        tvClient.write('IAVD3   \n');
+                        bootTime = new Date();
+                        break;
+                    case "テレビ":
+                        tvClient.write('ITVD    \n');
+                        break;
                     case "起動":
                         tvClient.write('POWR1   \n');
                         break;
@@ -237,7 +248,7 @@ grammar.compile(function(err, result){
                         tvClient.write('POWR0   \n');
                         break;
                     case "操作終了":
-                        bootTime.setSeconds(bootTime.getSeconds() - 10);
+                        bootTime.setSeconds(bootTime.getSeconds() - 100);
                         break;
                     case "音量だい":
                         volume += 1;
