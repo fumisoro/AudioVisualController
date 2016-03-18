@@ -1,7 +1,9 @@
 var Julius = require('julius'),
     grammar = new Julius.Grammar(),
     Net = require('net'),
-    __ = require('underscore');
+    __ = require('underscore'),
+    exec = require('child_process').exec,
+    child;
 
 var startStr = "へいマイク",
     closeStr = "操作終了";
@@ -176,6 +178,7 @@ grammar.compile(function(err, result){
         if (time.getTime() - bootTime.getTime() > 30000){
             switch (str){
                 case startStr:
+                    child = exec('aplay ~/AudioVisualController/aquestalkpi/start.wav');
                     bootTime = new Date();
                     break;
             }
