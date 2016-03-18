@@ -3,6 +3,12 @@ var Julius = require('julius'),
     Net = require('net'),
     __ = require('underscore');
 
+var startStr = "へいマイク",
+    closeStr = "操作終了";
+
+grammar.add(startStr);
+grammar.add(closeStr);
+
 var bluRayStr = "ブルーレイ"
     blueRayKeyword = {
         chapterNextStr: "チャプターつぎ",
@@ -13,8 +19,7 @@ var bluRayStr = "ブルーレイ"
         rewindStr: "巻き戻し",
         stopPlayStr: "停止",
         onStr: "起動",
-        offStr: "電源オフ",
-        closeStr: "操作終了"
+        offStr: "電源オフ"
     }
 
 __.each(blueRayKeyword, function(value, key){
@@ -34,8 +39,7 @@ var tvStr = "テレビ"
         ps4Str: "ぴーえすふぉー",
         onStr: "起動",
         offStr: "電源オフ",
-        tvStr: "テレビ",
-        closeStr: "操作終了"
+        tvStr: "テレビ"
     }
 
 __.each(tvKeyword, function(value, key){
@@ -169,94 +173,99 @@ grammar.compile(function(err, result){
     julius.on('result', function(str) {
         console.log('認識結果:', str);
         var time = new Date();
-        switch (str){
-            case "うえ移動":
-                blueClient.write("UP      \n");
-                bootTime = new Date();
-                break;
-            case "した移動":
-                blueClient.write("DW      \n");
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["chapterNextStr"]:
-                blueClient.write('DSKF    \n');
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["chapterBeforeStr"]:
-                blueClient.write('DSKB    \n');
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["stopPlayStr"]:
-                blueClient.write('DPUS    \n');
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["playStr"]:
-                blueClient.write('DPLY    \n');
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["endPlayStr"]:
-                blueClient.write('DSTP    \n');
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["fastForwardStr"]:
-                blueClient.write('DFWD    \n');
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["rewindStr"]:
-                blueClient.write('DREV    \n');
-                bootTime = new Date();
-                break;
-            case blueRayKeyword["onStr"]:
-                blueClient.write('POWR1   \n');
-                break;
-            case blueRayKeyword["offStr"]:
-                blueClient.write('POWR0   \n');
-                break;
-            case blueRayKeyword["closeStr"]:
-                bootTime.setSeconds(bootTime.getSeconds() - 60);
-                break;
-            case tvKeyword["channelNextStr"]:
-                tvClient.write('CHUP    \n');
-                bootTime = new Date();
-                break;
-            case tvKeyword["channelBeforeStr"]:
-                tvClient.write('CHDW    \n');
-                bootTime = new Date();
-                break;
-            case tvKeyword["modeChangeStr"]:
-                tvClient.write('ITGD    \n');
-                bootTime = new Date();
-                break;
-            case tvKeyword["wiiUStr"]:
-            case tvKeyword["ps4Str"]:
-                tvClient.write('IAVD3   \n');
-                bootTime = new Date();
-                break;
-            case tvKeyword["tvStr"]:
-                tvClient.write('ITVD    \n');
-                break;
-            case tvKeyword["onStr"]:
-                tvClient.write('POWR1   \n');
-                break;
-            case tvKeyword["offStr"]:
-                tvClient.write('POWR0   \n');
-                break;
-            case tvKeyword["closeStr"]:
-                bootTime.setSeconds(bootTime.getSeconds() - 100);
-                break;
-            case tvKeyword["volumeUpStr"]:
-                volume += 1;
-                console.log(volume);
-                tvClient.write("VOLM"+volume+"  \n");
-                bootTime = new Date();
-                break;
-            case tvKeyword["volumeDownStr"]:
-                volume -= 1;
-                console.log(volume);
-                tvClient.write("VOLM"+volume+"  \n");
-                bootTime = new Date();
-                break;
-        }
+        if (time.getTime() - bootTime.getTime() > 30000){
+            switch (str){
+                case startStr:
+                    bootTime = new Date();
+                    break;
+            }
+        }else{
+            switch (str){
+                    case "うえ移動":
+                        blueClient.write("UP      \n");
+                        bootTime = new Date();
+                        break;
+                    case "した移動":
+                        blueClient.write("DW      \n");
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["chapterNextStr"]:
+                        blueClient.write('DSKF    \n');
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["chapterBeforeStr"]:
+                        blueClient.write('DSKB    \n');
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["stopPlayStr"]:
+                        blueClient.write('DPUS    \n');
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["playStr"]:
+                        blueClient.write('DPLY    \n');
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["endPlayStr"]:
+                        blueClient.write('DSTP    \n');
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["fastForwardStr"]:
+                        blueClient.write('DFWD    \n');
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["rewindStr"]:
+                        blueClient.write('DREV    \n');
+                        bootTime = new Date();
+                        break;
+                    case blueRayKeyword["onStr"]:
+                        blueClient.write('POWR1   \n');
+                        break;
+                    case blueRayKeyword["offStr"]:
+                        blueClient.write('POWR0   \n');
+                        break;
+                    case closeStr:
+                        bootTime.setSeconds(bootTime.getSeconds() - 60);
+                        break;
+                    case tvKeyword["channelNextStr"]:
+                        tvClient.write('CHUP    \n');
+                        bootTime = new Date();
+                        break;
+                    case tvKeyword["channelBeforeStr"]:
+                        tvClient.write('CHDW    \n');
+                        bootTime = new Date();
+                        break;
+                    case tvKeyword["modeChangeStr"]:
+                        tvClient.write('ITGD    \n');
+                        bootTime = new Date();
+                        break;
+                    case tvKeyword["wiiUStr"]:
+                    case tvKeyword["ps4Str"]:
+                        tvClient.write('IAVD3   \n');
+                        bootTime = new Date();
+                        break;
+                    case tvKeyword["tvStr"]:
+                        tvClient.write('ITVD    \n');
+                        break;
+                    case tvKeyword["onStr"]:
+                        tvClient.write('POWR1   \n');
+                        break;
+                    case tvKeyword["offStr"]:
+                        tvClient.write('POWR0   \n');
+                        break;
+                    case tvKeyword["volumeUpStr"]:
+                        volume += 1;
+                        console.log(volume);
+                        tvClient.write("VOLM"+volume+"  \n");
+                        bootTime = new Date();
+                        break;
+                    case tvKeyword["volumeDownStr"]:
+                        volume -= 1;
+                        console.log(volume);
+                        tvClient.write("VOLM"+volume+"  \n");
+                        bootTime = new Date();
+                        break;
+                }
+            }
     });
 
     // エラー発生
