@@ -227,6 +227,7 @@ grammar.compile(function(err, result){
                         blueClient.write('POWR0   \n');
                         break;
                     case closeStr:
+                        child = exec('aplay ~/AudioVisualController/aquestalkpi/end.wav');
                         bootTime.setSeconds(bootTime.getSeconds() - 60);
                         break;
                     case tvKeyword["channelNextStr"]:
