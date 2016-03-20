@@ -248,13 +248,13 @@ grammar.compile(function(err, result){
                         speak(str);
                         break;
                     case tvKeyword["volumeUpStr"]:
-                        volume += 1;
+                        volume += 2;
                         console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
                         speak(str);
                         break;
                     case tvKeyword["volumeDownStr"]:
-                        volume -= 1;
+                        volume -= 2;
                         console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
                         speak(str);
