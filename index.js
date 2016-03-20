@@ -3,7 +3,9 @@ var Julius = require('julius'),
     Net = require('net'),
     __ = require('underscore'),
     exec = require('child_process').exec,
-    child;
+    child,
+    timerId,
+    activeFlg = false;
 
 var commonKeyword = {
         startStr: "へいマイク",
@@ -133,13 +135,6 @@ tvClient.on('data', function(data){
     console.log('tvClient data: ' + data);
 });
 
-
-
-var bootTime = new Date();
-bootTime.setSeconds(bootTime.getSeconds() - 100);
-
-var operationMode = "";
-
 grammar.compile(function(err, result){
     if (err) throw err
 
@@ -173,92 +168,99 @@ grammar.compile(function(err, result){
     // 認識結果を str で返す
     julius.on('result', function(str) {
         console.log('認識結果:', str);
-        var time = new Date();
-        if (time.getTime() - bootTime.getTime() > 30000){
+        if (!activeFlg){
             switch (str){
                 case commonKeyword["startStr"]:
+                    activeFlg = true;
                     speak("コマンドを受け付けます");
-                    bootTime = new Date();
+                    timerId = setTimeout(function(){
+                        close();
+                    }, 10000)
                     break;
             }
         }else{
             switch (str){
                     case commonKeyword["closeStr"]:
-                        child = exec('aplay ~/AudioVisualController/aquestalkpi/end.wav');
-                        bootTime.setSeconds(bootTime.getSeconds() - 60);
+                        close();
+                        break;
+                    case commonKeyword["onStr"]:
+                        tvClient.write('POWR1   \n');
+                        speak(str);
+                        break;
+                    case commonKeyword["offStr"]:
+                        tvClient.write('POWR0   \n');
+                        speak(str);
                         break;
                     case blueRayKeyword["chapterNextStr"]:
                         blueClient.write('DSKF    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case blueRayKeyword["chapterBeforeStr"]:
                         blueClient.write('DSKB    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case blueRayKeyword["stopPlayStr"]:
                         blueClient.write('DPUS    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case blueRayKeyword["playStr"]:
                         blueClient.write('DPLY    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case blueRayKeyword["endPlayStr"]:
                         blueClient.write('DSTP    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case blueRayKeyword["fastForwardStr"]:
                         blueClient.write('DFWD    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case blueRayKeyword["rewindStr"]:
                         blueClient.write('DREV    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case blueRayKeyword["onStr"]:
                         blueClient.write('POWR1   \n');
+                        speak(str);
                         break;
                     case blueRayKeyword["offStr"]:
                         blueClient.write('POWR0   \n');
+                        speak(str);
                         break;
                     case tvKeyword["channelNextStr"]:
                         tvClient.write('CHUP    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case tvKeyword["channelBeforeStr"]:
                         tvClient.write('CHDW    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case tvKeyword["modeChangeStr"]:
                         tvClient.write('ITGD    \n');
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case tvKeyword["wiiUStr"]:
                     case tvKeyword["ps4Str"]:
                         tvClient.write('IAVD3   \n');
-                        bootTime = new Date();
                         break;
                     case tvKeyword["tvStr"]:
                         tvClient.write('ITVD    \n');
-                        break;
-                    case tvKeyword["onStr"]:
-                        tvClient.write('POWR1   \n');
-                        break;
-                    case tvKeyword["offStr"]:
-                        tvClient.write('POWR0   \n');
+                        speak(str);
                         break;
                     case tvKeyword["volumeUpStr"]:
                         volume += 1;
                         console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
-                        bootTime = new Date();
+                        speak(str);
                         break;
                     case tvKeyword["volumeDownStr"]:
                         volume -= 1;
                         console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
-                        bootTime = new Date();
+                        speak(str);
                         break;
+                    default:
+                        speak("もう一度お願いします");
                 }
             }
     });
@@ -275,4 +277,8 @@ function speak(str){
     child = exec("~/AudioVisualController/aquestalkpi/AquesTalkPi '"+str+"' | aplay");
 }
 
-
+function close(){
+    clearTimeout(timerId);
+    activeFlg = false;
+    speak("受付を終了します");
+}
