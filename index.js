@@ -5,7 +5,7 @@ var Julius = require('julius'),
     exec = require('child_process').exec,
     child,
     timerId,
-    activeFlg = false;
+    commandMode = "done";
 
 var commonKeyword = {
         startStr: "へいマイク",
@@ -15,7 +15,7 @@ var commonKeyword = {
     }
 
 var blueRayKeyword = {
-        blueRayStr: "ブルーレイ,",
+        blueRayStr: "ブルーレイ",
         chapterNextStr: "チャプターつぎ",
         chapterBeforeStr: "チャプターまえ",
         endPlayStr: "再生終了",
@@ -168,104 +168,124 @@ grammar.compile(function(err, result){
     // 認識結果を str で返す
     julius.on('result', function(str) {
         console.log('認識結果:', str);
-        if (!activeFlg){
+        if (commandMode == "done"){
             switch (str){
                 case commonKeyword["startStr"]:
-                    activeFlg = true;
-                    speak("コマンドを受け付けます");
-                    timerId = setTimeout(function(){
-                        close();
-                    }, 10000)
+                    commandMode = "normal";
+                    keepAliveTimer("コマンドを受け付けます")
                     break;
             }
-        }else{
+        }else if(commandMode == "normal"){
             switch (str){
                     case commonKeyword["closeStr"]:
                         close();
                         break;
-                    case commonKeyword["onStr"]:
-                        tvClient.write('POWR1   \n');
-                        speak(str);
+                    case blueRayKeyword["blueRayStr"]:
+                        commandMode = "powerBluRay";
+                        keepAliveTimer(str);
                         break;
-                    case commonKeyword["offStr"]:
-                        tvClient.write('POWR0   \n');
-                        speak(str);
+                    case tvKeyword["tvStr"]:
+                        commandMode = "powerTv";
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["chapterNextStr"]:
                         blueClient.write('DSKF    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["chapterBeforeStr"]:
                         blueClient.write('DSKB    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["stopPlayStr"]:
                         blueClient.write('DPUS    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["playStr"]:
                         blueClient.write('DPLY    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["endPlayStr"]:
                         blueClient.write('DSTP    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["fastForwardStr"]:
                         blueClient.write('DFWD    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["rewindStr"]:
                         blueClient.write('DREV    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["onStr"]:
                         blueClient.write('POWR1   \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["offStr"]:
                         blueClient.write('POWR0   \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["channelNextStr"]:
                         tvClient.write('CHUP    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["channelBeforeStr"]:
                         tvClient.write('CHDW    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["modeChangeStr"]:
                         tvClient.write('ITGD    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["wiiUStr"]:
                     case tvKeyword["ps4Str"]:
                         tvClient.write('IAVD3   \n');
-                        break;
-                    case tvKeyword["tvStr"]:
-                        tvClient.write('ITVD    \n');
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["volumeUpStr"]:
                         volume += 2;
                         console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["volumeDownStr"]:
                         volume -= 2;
                         console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
-                        speak(str);
+                        keepAliveTimer(str);
                         break;
                     default:
-                        speak("もう一度お願いします");
+                        keepAliveTimer("もう一度お願いします");
+                }
+            } else if(commandMode == "powerBluRay"){
+                switch(str){
+                    case commonKeyword["onStr"]:
+                        blueClient.write('POWR1   \n');
+                        keepAliveTimer(str);
+                        commandMode = "normal";
+                        break;
+                    case commonKeyword["offStr"]:
+                        blueClient.write('POWR0   \n');
+                        keepAliveTimer(str);
+                        commandMode = "normal";
+                        break;
+                }
+            } else if(commandMode == "powerTv"){
+                switch(str){
+                    case commonKeyword["onStr"]:
+                        tvClient.write('POWR1   \n');
+                        keepAliveTimer(str);
+                        commandMode = "normal";
+                        break;
+                    case commonKeyword["offStr"]:
+                        tvClient.write('POWR0   \n');
+                        keepAliveTimer(str);
+                        commandMode = "normal";
+                        break;
                 }
             }
     });
 
-    // エラー発生
+    // juliusエラー処理
     julius.on('error', function(str) {
         console.error('エラー', str);
     });
@@ -279,6 +299,14 @@ function speak(str){
 
 function close(){
     clearTimeout(timerId);
-    activeFlg = false;
+    commandMode = "done";
     speak("受付を終了します");
+}
+
+function keepAliveTimer(str){
+    speak(str);
+    clearTimeout(timerId);
+    timerId = setTimeout(function(){
+        close();
+    }, 10000)
 }
