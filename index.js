@@ -5,50 +5,49 @@ var Julius = require('julius'),
     exec = require('child_process').exec,
     child;
 
-var startStr = "へいマイク",
-    closeStr = "操作終了";
+var commonKeyword = {
+        startStr: "へいマイク",
+        closeStr: "操作終了",
+        onStr: "起動",
+        offStr: "電源オフ"
+    }
 
-grammar.add(startStr);
-grammar.add(closeStr);
-
-var bluRayStr = "ブルーレイ"
-    blueRayKeyword = {
+var blueRayKeyword = {
+        blueRayStr: "ブルーレイ,",
         chapterNextStr: "チャプターつぎ",
         chapterBeforeStr: "チャプターまえ",
         endPlayStr: "再生終了",
         playStr: "再生",
         fastForwardStr: "早送り",
         rewindStr: "巻き戻し",
-        stopPlayStr: "停止",
-        onStr: "起動",
-        offStr: "電源オフ"
+        stopPlayStr: "停止"
     }
 
-__.each(blueRayKeyword, function(value, key){
-    blueRayKeyword[key] = bluRayStr + value;
-    grammar.add(blueRayKeyword[key]);
-    console.log(blueRayKeyword[key]);
-});
-
-var tvStr = "テレビ"
-    tvKeyword = {
+var tvKeyword = {
+        tvStr: "テレビ",
         channelNextStr: "チャンネルつぎ",
         channelBeforeStr: "チャンネルまえ",
         volumeUpStr: "音量だい",
         volumeDownStr: "音量しょう",
         modeChangeStr: "入力切り換え",
         wiiUStr: "うぃーゆー",
-        ps4Str: "ぴーえすふぉー",
-        onStr: "起動",
-        offStr: "電源オフ",
-        tvStr: "テレビ"
+        ps4Str: "ぴーえすふぉー"
     }
 
+__.each(commonKeyword, function(value, key){
+    grammar.add(commonKeyword[key]);
+    console.log(commonKeyword[key]);
+});
+
+__.each(blueRayKeyword, function(value, key){
+    grammar.add(blueRayKeyword[key]);
+    console.log(blueRayKeyword[key]);
+});
+
 __.each(tvKeyword, function(value, key){
-    tvKeyword[key] = tvStr + value;
     grammar.add(tvKeyword[key]);
     console.log(tvKeyword[key]);
-})
+});
 
 var volume = 20;
 
@@ -177,20 +176,16 @@ grammar.compile(function(err, result){
         var time = new Date();
         if (time.getTime() - bootTime.getTime() > 30000){
             switch (str){
-                case startStr:
-                    child = exec('aplay ~/AudioVisualController/aquestalkpi/start.wav');
+                case commonKeyword["startStr"]:
+                    speak("コマンドを受け付けます");
                     bootTime = new Date();
                     break;
             }
         }else{
             switch (str){
-                    case "うえ移動":
-                        blueClient.write("UP      \n");
-                        bootTime = new Date();
-                        break;
-                    case "した移動":
-                        blueClient.write("DW      \n");
-                        bootTime = new Date();
+                    case commonKeyword["closeStr"]:
+                        child = exec('aplay ~/AudioVisualController/aquestalkpi/end.wav');
+                        bootTime.setSeconds(bootTime.getSeconds() - 60);
                         break;
                     case blueRayKeyword["chapterNextStr"]:
                         blueClient.write('DSKF    \n');
@@ -225,10 +220,6 @@ grammar.compile(function(err, result){
                         break;
                     case blueRayKeyword["offStr"]:
                         blueClient.write('POWR0   \n');
-                        break;
-                    case closeStr:
-                        child = exec('aplay ~/AudioVisualController/aquestalkpi/end.wav');
-                        bootTime.setSeconds(bootTime.getSeconds() - 60);
                         break;
                     case tvKeyword["channelNextStr"]:
                         tvClient.write('CHUP    \n');
@@ -279,5 +270,9 @@ grammar.compile(function(err, result){
 
     julius.start();
 })
+
+function speak(str){
+    child = exec("~/AudioVisualController/aquestalkpi/AquesTalkPi '"+str+"' | aplay");
+}
 
 
