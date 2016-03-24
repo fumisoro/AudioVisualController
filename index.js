@@ -12,7 +12,9 @@ var commonKeyword = {
         startStr: "へいマイク",
         closeStr: "操作終了",
         onStr: "起動",
-        offStr: "電源オフ"
+        offStr: "電源オフ",
+        airOnStr: "エアコン起動",
+        airOffStr: "エアコン電源オフ"
     }
 
 var blueRayKeyword = {
@@ -25,10 +27,11 @@ var blueRayKeyword = {
         rewindStr: "巻き戻し",
         stopPlayStr: "停止",
         programsStr: "録画リスト",
-        upStr: "うえ",
-        downStr: "した",
-        leftStr: "ひだり",
-        rightStr: "みぎ"
+        upStr: "うえいどう",
+        downStr: "したいどう",
+        leftStr: "ひだりいどう",
+        rightStr: "みぎいどう",
+        backStr: "もどる"
     }
 
 var tvKeyword = {
@@ -183,6 +186,16 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
+                    case commonKeyword["airOnStr"]:
+                        console.log (freq_list.airOn);
+                        irkitSignal(freq_list.airOn);
+                        keepAliveTimer(str);
+                        break;
+                    case commonKeyword["airOffStr"]:
+                        console.log (freq_list.airOff);
+                        irkitSignal(freq_list.airOff);
+                        keepAliveTimer(str);
+                        break;
                     case commonKeyword["closeStr"]:
                         close();
                         break;
@@ -248,6 +261,10 @@ grammar.compile(function(err, result){
                         break;
                     case blueRayKeyword["leftStr"]:
                         irkitSignal(freq_list.left);
+                        keepAliveTimer(str);
+                        break;
+                    case blueRayKeyword["backStr"]:
+                        irkitSignal(freq_list.back);
                         keepAliveTimer(str);
                         break;
                     case tvKeyword["channelNextStr"]:
