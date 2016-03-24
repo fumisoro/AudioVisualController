@@ -3,6 +3,7 @@ var Julius = require('julius'),
     Net = require('net'),
     __ = require('underscore'),
     exec = require('child_process').exec,
+    freq_list = require('./freq_list'),
     child,
     timerId,
     commandMode = "done";
@@ -22,7 +23,12 @@ var blueRayKeyword = {
         playStr: "再生",
         fastForwardStr: "早送り",
         rewindStr: "巻き戻し",
-        stopPlayStr: "停止"
+        stopPlayStr: "停止",
+        programsStr: "録画リスト",
+        upStr: "うえ",
+        downStr: "した",
+        leftStr: "ひだり",
+        rightStr: "みぎ"
     }
 
 var tvKeyword = {
@@ -224,6 +230,26 @@ grammar.compile(function(err, result){
                         blueClient.write('POWR0   \n');
                         keepAliveTimer(str);
                         break;
+                    case blueRayKeyword["programsStr"]:
+                        irkitSignal(freq_list.programs);
+                        keepAliveTimer(str);
+                        break;
+                    case blueRayKeyword["upStr"]:
+                        irkitSignal(freq_list.up);
+                        keepAliveTimer(str);
+                        break;
+                    case blueRayKeyword["downStr"]:
+                        irkitSignal(freq_list.down);
+                        keepAliveTimer(str);
+                        break;
+                    case blueRayKeyword["rightStr"]:
+                        irkitSignal(freq_list.right);
+                        keepAliveTimer(str);
+                        break;
+                    case blueRayKeyword["leftStr"]:
+                        irkitSignal(freq_list.left);
+                        keepAliveTimer(str);
+                        break;
                     case tvKeyword["channelNextStr"]:
                         tvClient.write('CHUP    \n');
                         keepAliveTimer(str);
@@ -293,6 +319,10 @@ grammar.compile(function(err, result){
     julius.start();
 })
 
+function irkitSignal(freq){
+    child = exec("curl -i 'http://192.168.11.14/messages' -H 'X-Requested-With: curl' -d '"+JSON.stringify(freq)+"'");
+}
+
 function speak(str){
     child = exec("~/AudioVisualController/aquestalkpi/AquesTalkPi '"+str+"' | aplay");
 }
@@ -300,7 +330,7 @@ function speak(str){
 function close(){
     clearTimeout(timerId);
     commandMode = "done";
-    speak("受付を終了します");
+    speak("受付を終了しました");
 }
 
 function keepAliveTimer(str){
