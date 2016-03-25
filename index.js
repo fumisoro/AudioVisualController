@@ -16,7 +16,9 @@ var commonKeyword = {
         airStr: "エアコン",
         normalStr: "ノーマル",
         lightStr: "電気",
-        changeStr: "切り換え"
+        changeStr: "切り換え",
+        allStr: "すべての機器よ",
+        silenceStr: "静まれ"
     }
 
 var blueRayKeyword = {
@@ -194,6 +196,10 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
+                    case commonKeyword["allStr"]:
+                        commandMode = "all";
+                        keepAliveTimer("はい");
+                        break;
                     case commonKeyword["lightStr"]:
                         commandMode = "light";
                         keepAliveTimer(str + "モードに移行");
@@ -369,6 +375,20 @@ grammar.compile(function(err, result){
                     case commonKeyword["normalStr"]:
                         commandMode = "normal"
                         keepAliveTimer(str+"モードに移行");
+                        break;
+                }
+            } else if(commandMode == "all"){
+                switch(str){
+                    case commonKeyword["silenceStr"]:
+                        blueClient.write('POWR0   \n');
+                        tvClient.write('POWR0   \n');
+                        irkitSignal(freq_list.light);
+                        irkitSignal(freq_list.airOff);
+                        setTimeout(function(){
+                            irkitSignal(freq_list.light);
+                        }, 500)
+                        keepAliveTimer("かしこまりました");
+                        commandMode = "normal";
                         break;
                 }
             }
