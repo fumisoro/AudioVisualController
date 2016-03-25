@@ -14,7 +14,8 @@ var commonKeyword = {
         onStr: "起動",
         offStr: "電源オフ",
         airOnStr: "エアコン起動",
-        airOffStr: "エアコン電源オフ"
+        airOffStr: "エアコン電源オフ",
+        normalStr: "ノーマル"
     }
 
 var blueRayKeyword = {
@@ -138,10 +139,16 @@ tvClient.on('close', function(){
 
 blueClient.on('data', function(data){
     console.log('blueClient data: ' + data);
+    // if (data.toJSON().data.toString() == [79,75,13,13,10].toString()){
+    //     speak("成功しました");
+    // }
 });
 
 tvClient.on('data', function(data){
     console.log('tvClient data: ' + data);
+    // if (data.toJSON().data.toString() == [79,75,13,13,10].toString()){
+    //     speak("成功しました");
+    // }
 });
 
 grammar.compile(function(err, result){
@@ -201,11 +208,11 @@ grammar.compile(function(err, result){
                         break;
                     case blueRayKeyword["blueRayStr"]:
                         commandMode = "powerBluRay";
-                        keepAliveTimer(str);
+                        keepAliveTimer(str + "モードに移行");
                         break;
                     case tvKeyword["tvStr"]:
                         commandMode = "powerTv";
-                        keepAliveTimer(str);
+                        keepAliveTimer(str + "モードに移行");
                         break;
                     case blueRayKeyword["chapterNextStr"]:
                         blueClient.write('DSKF    \n');
@@ -311,6 +318,10 @@ grammar.compile(function(err, result){
                         keepAliveTimer(str);
                         commandMode = "normal";
                         break;
+                    case commonKeyword["normalStr"]:
+                        commandMode = "normal"
+                        keepAliveTimer(str+"モードに移行");
+                        break;
                 }
             } else if(commandMode == "powerTv"){
                 switch(str){
@@ -323,6 +334,10 @@ grammar.compile(function(err, result){
                         tvClient.write('POWR0   \n');
                         keepAliveTimer(str);
                         commandMode = "normal";
+                        break;
+                    case commonKeyword["normalStr"]:
+                        commandMode = "normal"
+                        keepAliveTimer(str+"モードに移行");
                         break;
                 }
             }
@@ -337,7 +352,16 @@ grammar.compile(function(err, result){
 })
 
 function irkitSignal(freq){
-    child = exec("curl -i 'http://192.168.11.14/messages' -H 'X-Requested-With: curl' -d '"+JSON.stringify(freq)+"'");
+    child = exec("curl -i 'http://192.168.11.14/messages' -H 'X-Requested-With: curl' -d '"+JSON.stringify(freq)+"'",
+        {timeout: 90000},
+        function(error, stdout, stderr){
+            if (stdout.substr(9,3) == "200"){
+                speak("成功しました");
+            }
+            if(error !== null) {
+               speak("失敗しました");
+            }
+        });
 }
 
 function speak(str){
