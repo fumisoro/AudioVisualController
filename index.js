@@ -286,6 +286,10 @@ grammar.compile(function(err, result){
                         keepAliveTimer(str);
                         break;
                     case tvKeyword["wiiUStr"]:
+                        irkitSignal(freq_list.wiiu);
+                        tvClient.write('IAVD3   \n');
+                        keepAliveTimer(str);
+                        break;
                     case tvKeyword["ps4Str"]:
                         tvClient.write('IAVD3   \n');
                         keepAliveTimer(str);
