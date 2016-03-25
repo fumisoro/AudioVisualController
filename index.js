@@ -13,9 +13,10 @@ var commonKeyword = {
         closeStr: "操作終了",
         onStr: "起動",
         offStr: "電源オフ",
-        airOnStr: "エアコン起動",
-        airOffStr: "エアコン電源オフ",
-        normalStr: "ノーマル"
+        airStr: "エアコン",
+        normalStr: "ノーマル",
+        lightStr: "電気",
+        changeStr: "切り換え"
     }
 
 var blueRayKeyword = {
@@ -193,15 +194,13 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
-                    case commonKeyword["airOnStr"]:
-                        console.log (freq_list.airOn);
-                        irkitSignal(freq_list.airOn);
-                        keepAliveTimer(str);
+                    case commonKeyword["lightStr"]:
+                        commandMode = "light";
+                        keepAliveTimer(str + "モードに移行");
                         break;
-                    case commonKeyword["airOffStr"]:
-                        console.log (freq_list.airOff);
-                        irkitSignal(freq_list.airOff);
-                        keepAliveTimer(str);
+                    case commonKeyword["airStr"]:
+                        commandMode = "air"
+                        keepAliveTimer(str + "モードに移行");
                         break;
                     case commonKeyword["closeStr"]:
                         close();
@@ -340,6 +339,34 @@ grammar.compile(function(err, result){
                         keepAliveTimer(str+"モードに移行");
                         break;
                 }
+            } else if(commandMode == "air"){
+                switch(str){
+                    case commonKeyword["onStr"]:
+                        irkitSignal(freq_list.airOn);
+                        keepAliveTimer(str);
+                        commandMode = "normal"
+                        break;
+                    case commonKeyword["offStr"]:
+                        irkitSignal(freq_list.airOff);
+                        keepAliveTimer(str);
+                        commandMode = "normal"
+                        break;
+                    case commonKeyword["normalStr"]:
+                        commandMode = "normal"
+                        keepAliveTimer(str+"モードに移行");
+                        break;
+                }
+            } else if(commandMode == "light"){
+                switch(str){
+                    case commonKeyword["changeStr"]:
+                        irkitSignal(freq_list.light);
+                        keepAliveTimer(str);
+                        break;
+                    case commonKeyword["normalStr"]:
+                        commandMode = "normal"
+                        keepAliveTimer(str+"モードに移行");
+                        break;
+                }
             }
     });
 
@@ -362,6 +389,7 @@ function irkitSignal(freq){
                speak("失敗しました");
             }
         });
+    console.log ("curl -i 'http://192.168.11.14/messages' -H 'X-Requested-With: curl' -d '"+JSON.stringify(freq)+"'");
 }
 
 function speak(str){
@@ -372,6 +400,7 @@ function close(){
     clearTimeout(timerId);
     commandMode = "done";
     speak("受付を終了しました");
+
 }
 
 function keepAliveTimer(str){

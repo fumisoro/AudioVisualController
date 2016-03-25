@@ -13,52 +13,54 @@
 % WORD_3
 電源オフ	 d e N g e N o f u
 % WORD_4
-エアコン起動	 e a k o N k i d o:
+エアコン	 e a k o N
 % WORD_5
-エアコン電源オフ	 e a k o N d e N g e N o f u
-% WORD_6
 ノーマル	 n o: m a r u
+% WORD_6
+電気	 d e N k i
 % WORD_7
-ブルーレイ	 b u r u: r e:
+切り換え	 k i r i k a e
 % WORD_8
-チャプターつぎ	 ch a p u t a: ts u g i
+ブルーレイ	 b u r u: r e:
 % WORD_9
-チャプターまえ	 ch a p u t a: m a e
+チャプターつぎ	 ch a p u t a: ts u g i
 % WORD_10
-再生終了	 s a i s e: sh u: ry o:
+チャプターまえ	 ch a p u t a: m a e
 % WORD_11
-再生	 s a i s e:
+再生終了	 s a i s e: sh u: ry o:
 % WORD_12
-早送り	 h a y a o k u r i
+再生	 s a i s e:
 % WORD_13
-巻き戻し	 m a k i m o d o sh i
+早送り	 h a y a o k u r i
 % WORD_14
-停止	 t e: sh i
+巻き戻し	 m a k i m o d o sh i
 % WORD_15
-録画リスト	 r o k u g a r i s u t o
+停止	 t e: sh i
 % WORD_16
-うえいどう	 u e: d o:
+録画リスト	 r o k u g a r i s u t o
 % WORD_17
-したいどう	 sh i t a i d o:
+うえいどう	 u e: d o:
 % WORD_18
-ひだりいどう	 h i d a r i: d o:
+したいどう	 sh i t a i d o:
 % WORD_19
-みぎいどう	 m i g i: d o:
+ひだりいどう	 h i d a r i: d o:
 % WORD_20
-もどる	 m o d o r u
+みぎいどう	 m i g i: d o:
 % WORD_21
-テレビ	 t e r e b i
+もどる	 m o d o r u
 % WORD_22
-チャンネルつぎ	 ch a N n e r u ts u g i
+テレビ	 t e r e b i
 % WORD_23
-チャンネルまえ	 ch a N n e r u m a e
+チャンネルつぎ	 ch a N n e r u ts u g i
 % WORD_24
-音量だい	 o N ry o: d a i
+チャンネルまえ	 ch a N n e r u m a e
 % WORD_25
-音量しょう	 o N ry o: sh o:
+音量だい	 o N ry o: d a i
 % WORD_26
-入力切り換え	 ny u: ry o k u k i r i k a e
+音量しょう	 o N ry o: sh o:
 % WORD_27
-うぃーゆー	 w i: y u:
+入力切り換え	 ny u: ry o k u k i r i k a e
 % WORD_28
+うぃーゆー	 w i: y u:
+% WORD_29
 ぴーえすふぉー	 p i: e s u f o:
