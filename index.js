@@ -19,7 +19,9 @@ var commonKeyword = {
         changeStr: "切り換え",
         allStr: "すべての機器よ",
         silenceStr: "静まれ",
-        reserveStr: "予約"
+        reserveStr: "予約",
+        goodMorningStr: "おはよう",
+        timeNowStr: "いまなんじ"
     }
 
 var blueRayKeyword = {
@@ -197,6 +199,12 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
+                    case commonKeyword["timeNowStr"]:
+                        timeNow();
+                        break;
+                    case commonKeyword["goodMorningStr"]:
+                        getForecast();
+                        break;
                     case commonKeyword["allStr"]:
                         commandMode = "all";
                         keepAliveTimer("はい");
@@ -421,18 +429,39 @@ grammar.compile(function(err, result){
     julius.start();
 })
 
-function irkitSignal(freq){
-    child = exec("curl -i 'http://192.168.11.14/messages' -H 'X-Requested-With: curl' -d '"+JSON.stringify(freq)+"'",
+function getForecast(){
+    var result;
+    child = exec("curl 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'",
         {timeout: 90000},
         function(error, stdout, stderr){
-            if (stdout.substr(9,3) == "200"){
-                speak("成功しました");
+            if(stdout){
+                var todayForecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][0];
+                var time = getNow();
+
+                speak("おはようございます。今日は"+time.month+"月"+time.day+"日"+time.week+"曜日です。今の時刻は"+time.hour+"時"+time.minute+"分"+time.second+"秒です。天気は"+todayForecast["telop"]+"です。");
             }
             if(error !== null) {
                speak("失敗しました");
             }
         });
-    console.log ("curl -i 'http://192.168.11.14/messages' -H 'X-Requested-With: curl' -d '"+JSON.stringify(freq)+"'");
+}
+
+function timeNow(){
+    var time = getNow();
+    speak("今の時刻は"+time.hour+"時"+time.minute+"分"+time.second+"秒です。");
+}
+
+function irkitSignal(freq){
+    child = exec("curl -i 'http://192.168.11.14/messages' -H 'X-Requested-With: curl' -d '"+JSON.stringify(freq)+"'",
+        {timeout: 90000},
+        function(error, stdout, stderr){
+            if (stdout.substr(9,3) == "200"){
+                // speak("成功しました");
+            }
+            if(error !== null) {
+               speak("失敗しました");
+            }
+        });
 }
 
 function speak(str){
@@ -452,4 +481,32 @@ function keepAliveTimer(str){
     timerId = setTimeout(function(){
         close();
     }, 10000)
+}
+
+function getNow(){
+    var date= new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var week = date.getDay();
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    w = ["日","月","火","水","木","金","土"];
+    return {
+            year: year,
+            month: month,
+            week: w[week],
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second
+            };
+}
+
+function unescapeUnicode(string) {
+    return string.replace(/\\u([a-fA-F0-9]{4})/g,
+        function(matchedString, group1) {
+            return String.fromCharCode(parseInt(group1, 16));
+        });
 }
