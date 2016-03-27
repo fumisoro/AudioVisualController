@@ -18,7 +18,8 @@ var commonKeyword = {
         lightStr: "電気",
         changeStr: "切り換え",
         allStr: "すべての機器よ",
-        silenceStr: "静まれ"
+        silenceStr: "静まれ",
+        reserveStr: "予約"
     }
 
 var blueRayKeyword = {
@@ -361,6 +362,11 @@ grammar.compile(function(err, result){
                         keepAliveTimer(str);
                         commandMode = "normal"
                         break;
+                    case commonKeyword["reserveStr"]:
+                        irkitSignal(freq_list.airSet);
+                        keepAliveTimer(str);
+                        commandMode = "normal";
+                        break;
                     case commonKeyword["normalStr"]:
                         commandMode = "normal"
                         keepAliveTimer(str+"モードに移行");
@@ -368,8 +374,21 @@ grammar.compile(function(err, result){
                 }
             } else if(commandMode == "light"){
                 switch(str){
-                    case commonKeyword["changeStr"]:
+                    case commonKeyword["onStr"]:
                         irkitSignal(freq_list.light);
+                        setTimeout(function(){
+                            irkitSignal(freq_list.light);
+                        }, 500);
+                        setTimeout(function(){
+                            irkitSignal(freq_list.light);
+                        }, 1000);
+                        keepAliveTimer(str);
+                        break;
+                    case commonKeyword["offStr"]:
+                        irkitSignal(freq_list.light);
+                        setTimeout(function(){
+                            irkitSignal(freq_list.light);
+                        }, 500);
                         keepAliveTimer(str);
                         break;
                     case commonKeyword["normalStr"]:
