@@ -199,125 +199,123 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
-                    case commonKeyword["timeNowStr"]:
+                    case commonKeyword["timeNowStr"]://いまなんじ
                         timeNow();
                         break;
-                    case commonKeyword["goodMorningStr"]:
+                    case commonKeyword["goodMorningStr"]://おはよう
                         getForecast();
                         break;
-                    case commonKeyword["allStr"]:
+                    case commonKeyword["allStr"]://すべての機器よ
                         commandMode = "all";
                         keepAliveTimer("はい");
                         break;
-                    case commonKeyword["lightStr"]:
+                    case commonKeyword["lightStr"]://電気モード
                         commandMode = "light";
                         keepAliveTimer(str + "に移行");
                         break;
-                    case commonKeyword["airStr"]:
+                    case commonKeyword["airStr"]://エアコンモード
                         commandMode = "air"
                         keepAliveTimer(str + "に移行");
                         break;
-                    case commonKeyword["closeStr"]:
+                    case commonKeyword["closeStr"]://操作終了
                         close();
                         break;
-                    case blueRayKeyword["blueRayStr"]:
+                    case blueRayKeyword["blueRayStr"]://ブルーレイモード
                         commandMode = "powerBluRay";
                         keepAliveTimer(str + "に移行");
                         break;
-                    case tvKeyword["tvStr"]:
+                    case tvKeyword["tvStr"]://テレビモード
                         commandMode = "powerTv";
                         keepAliveTimer(str + "に移行");
                         break;
-                    case blueRayKeyword["chapterNextStr"]:
+                    case blueRayKeyword["chapterNextStr"]://チャプターつぎ
                         blueClient.write('DSKF    \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["chapterBeforeStr"]:
+                    case blueRayKeyword["chapterBeforeStr"]://チャプターまえ
                         blueClient.write('DSKB    \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["stopPlayStr"]:
+                    case blueRayKeyword["stopPlayStr"]://停止
                         blueClient.write('DPUS    \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["playStr"]:
+                    case blueRayKeyword["playStr"]://再生
                         blueClient.write('DPLY    \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["endPlayStr"]:
+                    case blueRayKeyword["endPlayStr"]://再生終了
                         blueClient.write('DSTP    \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["fastForwardStr"]:
+                    case blueRayKeyword["fastForwardStr"]://巻き戻し
                         blueClient.write('DFWD    \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["rewindStr"]:
+                    case blueRayKeyword["rewindStr"]://早送り
                         blueClient.write('DREV    \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["onStr"]:
+                    case blueRayKeyword["onStr"]://起動
                         blueClient.write('POWR1   \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["offStr"]:
+                    case blueRayKeyword["offStr"]://電源OFF
                         blueClient.write('POWR0   \n');
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["programsStr"]:
+                    case blueRayKeyword["programsStr"]://録画リスト
                         irkitSignal(freq_list.programs);
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["upStr"]:
+                    case blueRayKeyword["upStr"]://うえいどう
                         irkitSignal(freq_list.up);
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["downStr"]:
+                    case blueRayKeyword["downStr"]://したいどう
                         irkitSignal(freq_list.down);
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["rightStr"]:
+                    case blueRayKeyword["rightStr"]://右移動
                         irkitSignal(freq_list.right);
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["leftStr"]:
+                    case blueRayKeyword["leftStr"]://左移動
                         irkitSignal(freq_list.left);
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["backStr"]:
+                    case blueRayKeyword["backStr"]://もどる
                         irkitSignal(freq_list.back);
                         keepAliveTimer(str);
                         break;
-                    case tvKeyword["channelNextStr"]:
+                    case tvKeyword["channelNextStr"]://チャンネルつぎ
                         tvClient.write('CHUP    \n');
                         keepAliveTimer(str);
                         break;
-                    case tvKeyword["channelBeforeStr"]:
+                    case tvKeyword["channelBeforeStr"]://チャンネルまえ
                         tvClient.write('CHDW    \n');
                         keepAliveTimer(str);
                         break;
-                    case tvKeyword["modeChangeStr"]:
+                    case tvKeyword["modeChangeStr"]://入力切替
                         tvClient.write('ITGD    \n');
                         keepAliveTimer(str);
                         break;
-                    case tvKeyword["wiiUStr"]:
+                    case tvKeyword["wiiUStr"]://wiiu
                         irkitSignal(freq_list.wiiu);
                         tvClient.write('IAVD3   \n');
                         keepAliveTimer(str);
                         break;
-                    case tvKeyword["ps4Str"]:
+                    case tvKeyword["ps4Str"]://ps4
                         tvClient.write('IAVD3   \n');
                         keepAliveTimer(str);
                         break;
-                    case tvKeyword["volumeUpStr"]:
+                    case tvKeyword["volumeUpStr"]://おんりょうだい
                         volume += 2;
-                        console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
                         keepAliveTimer(str);
                         break;
-                    case tvKeyword["volumeDownStr"]:
+                    case tvKeyword["volumeDownStr"]://おんりょうしょう
                         volume -= 2;
-                        console.log(volume);
                         tvClient.write("VOLM"+volume+"  \n");
                         keepAliveTimer(str);
                         break;
@@ -326,62 +324,127 @@ grammar.compile(function(err, result){
                 }
             } else if(commandMode == "powerBluRay"){
                 switch(str){
-                    case commonKeyword["onStr"]:
+                    case commonKeyword["onStr"]://起動
                         blueClient.write('POWR1   \n');
                         keepAliveTimer(str);
                         commandMode = "normal";
                         break;
-                    case commonKeyword["offStr"]:
+                    case commonKeyword["offStr"]://電源OFF
                         blueClient.write('POWR0   \n');
                         keepAliveTimer(str);
                         commandMode = "normal";
                         break;
-                    case commonKeyword["normalStr"]:
+                    case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
                         keepAliveTimer(str+"に移行");
+                        break;
+                    case commonKeyword["lightStr"]://電気モード
+                        commandMode = "light";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["airStr"]://エアコンモード
+                        commandMode = "air"
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["closeStr"]://操作終了
+                        close();
+                        break;
+                    case blueRayKeyword["blueRayStr"]://ブルーレイモード
+                        commandMode = "powerBluRay";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case tvKeyword["tvStr"]://テレビモード
+                        commandMode = "powerTv";
+                        keepAliveTimer(str + "に移行");
                         break;
                 }
             } else if(commandMode == "powerTv"){
                 switch(str){
-                    case commonKeyword["onStr"]:
+                    case commonKeyword["onStr"]://起動
                         tvClient.write('POWR1   \n');
                         keepAliveTimer(str);
                         commandMode = "normal";
                         break;
-                    case commonKeyword["offStr"]:
+                    case commonKeyword["offStr"]://電源OFF
                         tvClient.write('POWR0   \n');
                         keepAliveTimer(str);
                         commandMode = "normal";
                         break;
-                    case commonKeyword["normalStr"]:
+                    case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
                         keepAliveTimer(str+"に移行");
                         break;
+                    case commonKeyword["lightStr"]://電気モード
+                        commandMode = "light";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["airStr"]://エアコンモード
+                        commandMode = "air"
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["closeStr"]://操作終了
+                        close();
+                        break;
+                    case blueRayKeyword["blueRayStr"]://ブルーレイモード
+                        commandMode = "powerBluRay";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case tvKeyword["tvStr"]://テレビモード
+                        commandMode = "powerTv";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    default:
+                        keepAliveTimer("もう一度お願いします");
                 }
             } else if(commandMode == "air"){
                 switch(str){
-                    case commonKeyword["onStr"]:
+                    case commonKeyword["onStr"]://起動
                         irkitSignal(freq_list.airOn);
                         keepAliveTimer(str);
                         commandMode = "normal"
                         break;
-                    case commonKeyword["offStr"]:
+                    case commonKeyword["offStr"]: //電源OFF
                         irkitSignal(freq_list.airOff);
                         keepAliveTimer(str);
                         commandMode = "normal"
                         break;
-                    case commonKeyword["reserveStr"]:
+                    case commonKeyword["reserveStr"]://予約
                         irkitSignal(freq_list.airSet);
                         keepAliveTimer(str);
                         commandMode = "normal";
                         break;
-                    case commonKeyword["normalStr"]:
+                    case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
                         keepAliveTimer(str+"に移行");
                         break;
+                    case commonKeyword["lightStr"]://電気モード
+                        commandMode = "light";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["airStr"]://エアコンモード
+                        commandMode = "air"
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["closeStr"]://操作終了
+                        close();
+                        break;
+                    case blueRayKeyword["blueRayStr"]://ブルーレイモード
+                        commandMode = "powerBluRay";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case tvKeyword["tvStr"]://テレビモード
+                        commandMode = "powerTv";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    default:
+                        keepAliveTimer("もう一度お願いします");
                 }
             } else if(commandMode == "light"){
                 switch(str){
+                    case commonKeyword["changeStr"]:
+                        irkitSignal(freq_list.light);
+                        keepAliveTimer(str);
+                        break;
                     case commonKeyword["onStr"]:
                         irkitSignal(freq_list.light);
                         setTimeout(function(){
@@ -390,6 +453,7 @@ grammar.compile(function(err, result){
                         setTimeout(function(){
                             irkitSignal(freq_list.light);
                         }, 1000);
+                        commandMode = "normal";
                         keepAliveTimer(str);
                         break;
                     case commonKeyword["offStr"]:
@@ -397,12 +461,34 @@ grammar.compile(function(err, result){
                         setTimeout(function(){
                             irkitSignal(freq_list.light);
                         }, 500);
+                        commandMode = "normal";
                         keepAliveTimer(str);
                         break;
-                    case commonKeyword["normalStr"]:
+                    case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
-                        keepAliveTimer(str+"モードに移行");
+                        keepAliveTimer(str+"に移行");
                         break;
+                    case commonKeyword["lightStr"]://電気モード
+                        commandMode = "light";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["airStr"]://エアコンモード
+                        commandMode = "air"
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["closeStr"]://操作終了
+                        close();
+                        break;
+                    case blueRayKeyword["blueRayStr"]://ブルーレイモード
+                        commandMode = "powerBluRay";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case tvKeyword["tvStr"]://テレビモード
+                        commandMode = "powerTv";
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    default:
+                        keepAliveTimer("もう一度お願いします");
                 }
             } else if(commandMode == "all"){
                 switch(str){
