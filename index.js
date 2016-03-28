@@ -13,8 +13,8 @@ var commonKeyword = {
         closeStr: "操作終了",
         onStr: "起動",
         offStr: "電源オフ",
-        airStr: "エアコン",
-        normalStr: "ノーマル",
+        airStr: "エアコンモード",
+        normalStr: "ノーマルモード",
         lightStr: "電気",
         changeStr: "切り換え",
         allStr: "すべての機器よ",
@@ -25,7 +25,7 @@ var commonKeyword = {
     }
 
 var blueRayKeyword = {
-        blueRayStr: "ブルーレイ",
+        blueRayStr: "ブルーレイモード",
         chapterNextStr: "チャプターつぎ",
         chapterBeforeStr: "チャプターまえ",
         endPlayStr: "再生終了",
@@ -42,7 +42,7 @@ var blueRayKeyword = {
     }
 
 var tvKeyword = {
-        tvStr: "テレビ",
+        tvStr: "テレビモード",
         channelNextStr: "チャンネルつぎ",
         channelBeforeStr: "チャンネルまえ",
         volumeUpStr: "音量だい",
@@ -211,22 +211,22 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["lightStr"]:
                         commandMode = "light";
-                        keepAliveTimer(str + "モードに移行");
+                        keepAliveTimer(str + "に移行");
                         break;
                     case commonKeyword["airStr"]:
                         commandMode = "air"
-                        keepAliveTimer(str + "モードに移行");
+                        keepAliveTimer(str + "に移行");
                         break;
                     case commonKeyword["closeStr"]:
                         close();
                         break;
                     case blueRayKeyword["blueRayStr"]:
                         commandMode = "powerBluRay";
-                        keepAliveTimer(str + "モードに移行");
+                        keepAliveTimer(str + "に移行");
                         break;
                     case tvKeyword["tvStr"]:
                         commandMode = "powerTv";
-                        keepAliveTimer(str + "モードに移行");
+                        keepAliveTimer(str + "に移行");
                         break;
                     case blueRayKeyword["chapterNextStr"]:
                         blueClient.write('DSKF    \n');
@@ -338,7 +338,7 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["normalStr"]:
                         commandMode = "normal"
-                        keepAliveTimer(str+"モードに移行");
+                        keepAliveTimer(str+"に移行");
                         break;
                 }
             } else if(commandMode == "powerTv"){
@@ -355,7 +355,7 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["normalStr"]:
                         commandMode = "normal"
-                        keepAliveTimer(str+"モードに移行");
+                        keepAliveTimer(str+"に移行");
                         break;
                 }
             } else if(commandMode == "air"){
@@ -377,7 +377,7 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["normalStr"]:
                         commandMode = "normal"
-                        keepAliveTimer(str+"モードに移行");
+                        keepAliveTimer(str+"に移行");
                         break;
                 }
             } else if(commandMode == "light"){
