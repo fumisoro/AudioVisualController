@@ -15,7 +15,7 @@ var commonKeyword = {
         offStr: "電源オフ",
         airStr: "エアコンモード",
         normalStr: "ノーマルモード",
-        lightStr: "電気",
+        lightStr: "電気モード",
         changeStr: "切り換え",
         allStr: "すべての機器よ",
         silenceStr: "静まれ",
@@ -38,7 +38,7 @@ var blueRayKeyword = {
         downStr: "したいどう",
         leftStr: "ひだりいどう",
         rightStr: "みぎいどう",
-        backStr: "もどる"
+        backStr: "もどる操作"
     }
 
 var tvKeyword = {
@@ -525,6 +525,13 @@ function getForecast(){
                 var time = getNow();
 
                 speak("おはようございます。今日は"+time.month+"月"+time.day+"日"+time.week+"曜日です。今の時刻は"+time.hour+"時"+time.minute+"分"+time.second+"秒です。天気は"+todayForecast["telop"]+"です。");
+                keepAliveTimer("");
+                setTimeout(function(){
+                    keepAliveTimer("");
+                }, 8000);
+                setTimeout(function(){
+                    keepAliveTimer("");
+                }, 14000);
             }
             if(error !== null) {
                speak("失敗しました");
