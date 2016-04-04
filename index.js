@@ -2,11 +2,29 @@ var Julius = require('julius'),
     grammar = new Julius.Grammar(),
     Net = require('net'),
     __ = require('underscore'),
+    request = require('request'),
     exec = require('child_process').exec,
     freq_list = require('./freq_list'),
     child,
     timerId,
     commandMode = "done";
+
+var options = {
+    uri: 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=6554684f74434d776d6452446d5a415552384e45646a635a6663747538383365774a762f705452514e6337',
+    body: {
+        "utt": "こんにちは"
+    },
+    json: true
+};
+
+request.post(options, function(error, response, body){
+  if (!error && response.statusCode == 200) {
+    console.log(body.name);
+  } else {
+    console.log (response);
+    console.log('error: '+ response.statusCode);
+  }
+});
 
 var commonKeyword = {
         startStr: "へいマイク",
@@ -21,7 +39,8 @@ var commonKeyword = {
         silenceStr: "静まれ",
         reserveStr: "予約",
         goodMorningStr: "おはよう",
-        timeNowStr: "いまなんじ"
+        timeNowStr: "いまなんじ",
+        todayForecastStr: "今日の天気は"
     }
 
 var blueRayKeyword = {
@@ -199,11 +218,13 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
+                    case commonKeyword["todayForecastStr"]//今日の天気は
+
                     case commonKeyword["timeNowStr"]://いまなんじ
                         timeNow();
                         break;
                     case commonKeyword["goodMorningStr"]://おはよう
-                        getForecast();
+                        morningGreeting();
                         break;
                     case commonKeyword["allStr"]://すべての機器よ
                         commandMode = "all";
@@ -515,7 +536,22 @@ grammar.compile(function(err, result){
     julius.start();
 })
 
-function getForecast(){
+function todayForecast(){
+    child = exec("curl 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'",
+        {timeout: 90000},
+        function(error, stdout, stderr){
+            if(stdout){
+                var todayForecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][0];
+                speak("今日の天気は"+todayForecast["telop"]+"です。");
+                keepAliveTimer("");
+            }
+            if(error !== null) {
+               speak("天気の取得に失敗しました");
+            }
+        });
+}
+
+function morningGreeting(){
     var result;
     child = exec("curl 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'",
         {timeout: 90000},
@@ -534,7 +570,7 @@ function getForecast(){
                 }, 14000);
             }
             if(error !== null) {
-               speak("失敗しました");
+               speak("挨拶に失敗しました");
             }
         });
 }
@@ -552,7 +588,7 @@ function irkitSignal(freq){
                 // speak("成功しました");
             }
             if(error !== null) {
-               speak("失敗しました");
+               speak("赤外線の送信に失敗しました");
             }
         });
 }
