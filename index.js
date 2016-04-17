@@ -217,8 +217,9 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
-                    case commonKeyword["todayForecastStr"]//今日の天気は
-
+                    case commonKeyword["todayForecastStr"]://今日の天気は
+                        todayForecast();
+                        break;
                     case commonKeyword["timeNowStr"]://いまなんじ
                         timeNow();
                         break;
@@ -548,8 +549,9 @@ grammar.compile(function(err, result){
 })
 
 function todayForecast(){
+    speak("天気を取得します");
     child = exec("curl 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'",
-        {timeout: 90000},
+        {timeout: 9000},
         function(error, stdout, stderr){
             if(stdout){
                 var todayForecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][0];
