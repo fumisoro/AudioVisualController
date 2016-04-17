@@ -37,6 +37,7 @@ var commonKeyword = {
         changeStr: "切り換え",
         allStr: "すべての機器よ",
         silenceStr: "静まれ",
+        wakeUpStr: "目覚めよ",
         reserveStr: "予約",
         goodMorningStr: "おはよう",
         timeNowStr: "いまなんじ",
@@ -45,8 +46,8 @@ var commonKeyword = {
 
 var blueRayKeyword = {
         blueRayStr: "ブルーレイモード",
-        chapterNextStr: "チャプターつぎ",
-        chapterBeforeStr: "チャプターまえ",
+        chapterNextStr: "つぎチャプター",
+        chapterBeforeStr: "まえチャプター",
         endPlayStr: "再生終了",
         playStr: "再生",
         fastForwardStr: "早送り",
@@ -55,8 +56,6 @@ var blueRayKeyword = {
         programsStr: "録画リスト",
         upStr: "うえいどう",
         downStr: "したいどう",
-        leftStr: "ひだりいどう",
-        rightStr: "みぎいどう",
         backStr: "もどる操作"
     }
 
@@ -297,14 +296,14 @@ grammar.compile(function(err, result){
                         irkitSignal(freq_list.down);
                         keepAliveTimer(str);
                         break;
-                    case blueRayKeyword["rightStr"]://右移動
-                        irkitSignal(freq_list.right);
-                        keepAliveTimer(str);
-                        break;
-                    case blueRayKeyword["leftStr"]://左移動
-                        irkitSignal(freq_list.left);
-                        keepAliveTimer(str);
-                        break;
+                    // case blueRayKeyword["rightStr"]://右移動
+                    //     irkitSignal(freq_list.right);
+                    //     keepAliveTimer(str);
+                    //     break;
+                    // case blueRayKeyword["leftStr"]://左移動
+                    //     irkitSignal(freq_list.left);
+                    //     keepAliveTimer(str);
+                    //     break;
                     case blueRayKeyword["backStr"]://もどる
                         irkitSignal(freq_list.back);
                         keepAliveTimer(str);
@@ -521,6 +520,18 @@ grammar.compile(function(err, result){
                         setTimeout(function(){
                             irkitSignal(freq_list.light);
                         }, 500)
+                        keepAliveTimer("かしこまりました");
+                        commandMode = "normal";
+                        break;
+                    case commonKeyword["wakeUpStr"]:
+                        blueClient.write('POWR1   \n');
+                        irkitSignal(freq_list.light);
+                        setTimeout(function(){
+                            irkitSignal(freq_list.light);
+                        }, 500);
+                        setTimeout(function(){
+                            irkitSignal(freq_list.light);
+                        }, 1000);
                         keepAliveTimer("かしこまりました");
                         commandMode = "normal";
                         break;
