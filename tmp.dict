@@ -1,38 +1,48 @@
 0	[<s>]	silB
 1	[<s>]	silE
 2	[<sp>]	sp
-3	[へいマイク]	e: m a i k u
-4	[操作終了]	s o: s a sh u: ry o:
-5	[起動]	k i d o:
-6	[電源オフ]	d e N g e N o f u
-7	[エアコンモード]	e a k o N m o: d o
-8	[ノーマルモード]	n o: m a r u m o: d o
-9	[電気モード]	d e N k i m o: d o
-10	[切り換え]	k i r i k a e
-11	[すべての機器よ]	s u b e t e n o k i k i y o
-12	[静まれ]	sh i z u m a r e
-13	[目覚めよ]	m e z a m e y o
-14	[予約]	y o y a k u
-15	[おはよう]	o h a y o:
-16	[いまなんじ]	i m a n a N j i
-17	[今日の天気は]	ky o: n o t e N k i w a
-18	[ブルーレイモード]	b u r u: r e: m o: d o
-19	[つぎチャプター]	ts u g i ch a p u t a:
-20	[まえチャプター]	m a e ch a p u t a:
-21	[再生終了]	s a i s e: sh u: ry o:
-22	[再生]	s a i s e:
-23	[早送り]	h a y a o k u r i
-24	[巻き戻し]	m a k i m o d o sh i
-25	[停止]	t e: sh i
-26	[録画リスト]	r o k u g a r i s u t o
-27	[うえいどう]	u e: d o:
-28	[したいどう]	sh i t a i d o:
-29	[もどる操作]	m o d o r u s o: s a
-30	[テレビモード]	t e r e b i m o: d o
-31	[チャンネルつぎ]	ch a N n e r u ts u g i
-32	[チャンネルまえ]	ch a N n e r u m a e
-33	[音量だい]	o N ry o: d a i
-34	[音量しょう]	o N ry o: sh o:
-35	[入力切り換え]	ny u: ry o k u k i r i k a e
-36	[うぃーゆー]	w i: y u:
-37	[ぴーえすふぉー]	p i: e s u f o:
+3	[にかいループ]	n i k a i r u: p u
+4	[さんかいループ]	s a N k a i r u: p u
+5	[よんかいループ]	y o N k a i r u: p u
+6	[ごかいループ]	g o k a i r u: p u
+7	[ろっかいループ]	r o q k a i r u: p u
+8	[ななかいループ]	n a n a k a i r u: p u
+9	[はちかいループ]	w a ch i k a i r u: p u
+10	[きゅうかいループ]	ky u: k a i r u: p u
+11	[じゅっかいループ]	j u q k a i r u: p u
+12	[へいマイク]	e: m a i k u
+13	[操作終了]	s o: s a sh u: ry o:
+14	[起動]	k i d o:
+15	[電源オフ]	d e N g e N o f u
+16	[エアコンモード]	e a k o N m o: d o
+17	[ノーマルモード]	n o: m a r u m o: d o
+18	[ループモード]	r u: p u m o: d o
+19	[電気モード]	d e N k i m o: d o
+20	[切り換え]	k i r i k a e
+21	[すべての機器よ]	s u b e t e n o k i k i y o
+22	[静まれ]	sh i z u m a r e
+23	[目覚めよ]	m e z a m e y o
+24	[予約]	y o y a k u
+25	[おはよう]	o h a y o:
+26	[いまなんじ]	i m a n a N j i
+27	[今日の天気は]	ky o: n o t e N k i w a
+28	[ブルーレイモード]	b u r u: r e: m o: d o
+29	[つぎチャプター]	ts u g i ch a p u t a:
+30	[まえチャプター]	m a e ch a p u t a:
+31	[再生終了]	s a i s e: sh u: ry o:
+32	[再生]	s a i s e:
+33	[早送り]	h a y a o k u r i
+34	[巻き戻し]	m a k i m o d o sh i
+35	[停止]	t e: sh i
+36	[録画リスト]	r o k u g a r i s u t o
+37	[うえいどう]	u e: d o:
+38	[したいどう]	sh i t a i d o:
+39	[もどる操作]	m o d o r u s o: s a
+40	[テレビモード]	t e r e b i m o: d o
+41	[チャンネルつぎ]	ch a N n e r u ts u g i
+42	[チャンネルまえ]	ch a N n e r u m a e
+43	[音量だい]	o N ry o: d a i
+44	[音量しょう]	o N ry o: sh o:
+45	[入力切り換え]	ny u: ry o k u k i r i k a e
+46	[うぃーゆー]	w i: y u:
+47	[ぴーえすふぉー]	p i: e s u f o:

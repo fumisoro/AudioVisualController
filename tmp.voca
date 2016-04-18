@@ -5,72 +5,92 @@
 % NOISE
 <sp>	sp
 % WORD_0
-へいマイク	 e: m a i k u
+にかいループ	 n i k a i r u: p u
 % WORD_1
-操作終了	 s o: s a sh u: ry o:
+さんかいループ	 s a N k a i r u: p u
 % WORD_2
-起動	 k i d o:
+よんかいループ	 y o N k a i r u: p u
 % WORD_3
-電源オフ	 d e N g e N o f u
+ごかいループ	 g o k a i r u: p u
 % WORD_4
-エアコンモード	 e a k o N m o: d o
+ろっかいループ	 r o q k a i r u: p u
 % WORD_5
-ノーマルモード	 n o: m a r u m o: d o
+ななかいループ	 n a n a k a i r u: p u
 % WORD_6
-電気モード	 d e N k i m o: d o
+はちかいループ	 w a ch i k a i r u: p u
 % WORD_7
-切り換え	 k i r i k a e
+きゅうかいループ	 ky u: k a i r u: p u
 % WORD_8
-すべての機器よ	 s u b e t e n o k i k i y o
+じゅっかいループ	 j u q k a i r u: p u
 % WORD_9
-静まれ	 sh i z u m a r e
+へいマイク	 e: m a i k u
 % WORD_10
-目覚めよ	 m e z a m e y o
+操作終了	 s o: s a sh u: ry o:
 % WORD_11
-予約	 y o y a k u
+起動	 k i d o:
 % WORD_12
-おはよう	 o h a y o:
+電源オフ	 d e N g e N o f u
 % WORD_13
-いまなんじ	 i m a n a N j i
+エアコンモード	 e a k o N m o: d o
 % WORD_14
-今日の天気は	 ky o: n o t e N k i w a
+ノーマルモード	 n o: m a r u m o: d o
 % WORD_15
-ブルーレイモード	 b u r u: r e: m o: d o
+ループモード	 r u: p u m o: d o
 % WORD_16
-つぎチャプター	 ts u g i ch a p u t a:
+電気モード	 d e N k i m o: d o
 % WORD_17
-まえチャプター	 m a e ch a p u t a:
+切り換え	 k i r i k a e
 % WORD_18
-再生終了	 s a i s e: sh u: ry o:
+すべての機器よ	 s u b e t e n o k i k i y o
 % WORD_19
-再生	 s a i s e:
+静まれ	 sh i z u m a r e
 % WORD_20
-早送り	 h a y a o k u r i
+目覚めよ	 m e z a m e y o
 % WORD_21
-巻き戻し	 m a k i m o d o sh i
+予約	 y o y a k u
 % WORD_22
-停止	 t e: sh i
+おはよう	 o h a y o:
 % WORD_23
-録画リスト	 r o k u g a r i s u t o
+いまなんじ	 i m a n a N j i
 % WORD_24
-うえいどう	 u e: d o:
+今日の天気は	 ky o: n o t e N k i w a
 % WORD_25
-したいどう	 sh i t a i d o:
+ブルーレイモード	 b u r u: r e: m o: d o
 % WORD_26
-もどる操作	 m o d o r u s o: s a
+つぎチャプター	 ts u g i ch a p u t a:
 % WORD_27
-テレビモード	 t e r e b i m o: d o
+まえチャプター	 m a e ch a p u t a:
 % WORD_28
-チャンネルつぎ	 ch a N n e r u ts u g i
+再生終了	 s a i s e: sh u: ry o:
 % WORD_29
-チャンネルまえ	 ch a N n e r u m a e
+再生	 s a i s e:
 % WORD_30
-音量だい	 o N ry o: d a i
+早送り	 h a y a o k u r i
 % WORD_31
-音量しょう	 o N ry o: sh o:
+巻き戻し	 m a k i m o d o sh i
 % WORD_32
-入力切り換え	 ny u: ry o k u k i r i k a e
+停止	 t e: sh i
 % WORD_33
-うぃーゆー	 w i: y u:
+録画リスト	 r o k u g a r i s u t o
 % WORD_34
+うえいどう	 u e: d o:
+% WORD_35
+したいどう	 sh i t a i d o:
+% WORD_36
+もどる操作	 m o d o r u s o: s a
+% WORD_37
+テレビモード	 t e r e b i m o: d o
+% WORD_38
+チャンネルつぎ	 ch a N n e r u ts u g i
+% WORD_39
+チャンネルまえ	 ch a N n e r u m a e
+% WORD_40
+音量だい	 o N ry o: d a i
+% WORD_41
+音量しょう	 o N ry o: sh o:
+% WORD_42
+入力切り換え	 ny u: ry o k u k i r i k a e
+% WORD_43
+うぃーゆー	 w i: y u:
+% WORD_44
 ぴーえすふぉー	 p i: e s u f o:

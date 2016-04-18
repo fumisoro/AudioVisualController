@@ -5,9 +5,11 @@ var Julius = require('julius'),
     request = require('request'),
     exec = require('child_process').exec,
     freq_list = require('./freq_list'),
+    sleep = require('sleep'),
     child,
     timerId,
-    commandMode = "done";
+    commandMode = "done",
+    roopTime = 1;
 
 var options = {
     uri: 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=6554684f74434d776d6452446d5a415552384e45646a635a6663747538383365774a762f705452514e6337',
@@ -26,6 +28,18 @@ request.post(options, function(error, response, body){
   }
 });
 
+var roopKeyword = {
+    twoStr: "にかいループ",
+    threeStr: "さんかいループ",
+    fourStr: "よんかいループ",
+    fiveStr: "ごかいループ",
+    sixStr: "ろっかいループ",
+    sevenStr: "ななかいループ",
+    eigthStr: "はちかいループ",
+    nineStr: "きゅうかいループ",
+    tenStr: "じゅっかいループ"
+}
+
 var commonKeyword = {
         startStr: "へいマイク",
         closeStr: "操作終了",
@@ -33,6 +47,7 @@ var commonKeyword = {
         offStr: "電源オフ",
         airStr: "エアコンモード",
         normalStr: "ノーマルモード",
+        roopStr: "ループモード",
         lightStr: "電気モード",
         changeStr: "切り換え",
         allStr: "すべての機器よ",
@@ -69,6 +84,11 @@ var tvKeyword = {
         wiiUStr: "うぃーゆー",
         ps4Str: "ぴーえすふぉー"
     }
+
+__.each(roopKeyword, function(value, key){
+    grammar.add(roopKeyword[key]);
+    console.log(roopKeyword[key]);
+})
 
 __.each(commonKeyword, function(value, key){
     grammar.add(commonKeyword[key]);
@@ -217,6 +237,42 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
+                    case roopKeyword["twoStr"]:
+                        roopTime = 2;
+                        keepAliveTimer("にかい繰り返します");
+                        break;
+                    case roopKeyword["threeStr"]:
+                        roopTime = 3;
+                        keepAliveTimer("さんかい繰り返します");
+                        break;
+                    case roopKeyword["fourStr"]:
+                        roopTime = 4;
+                        keepAliveTimer("よんかい繰り返します");
+                        break;
+                    case roopKeyword["fiveStr"]:
+                        roopTime = 5;
+                        keepAliveTimer("ごかい繰り返します");
+                        break;
+                    case roopKeyword["sixStr"]:
+                        roopTime = 6;
+                        keepAliveTimer("ろっかい繰り返します");
+                        break;
+                    case roopKeyword["sevenStr"]:
+                        roopTime = 7;
+                        keepAliveTimer("ななかい繰り返します");
+                        break;
+                    case roopKeyword["eigthStr"]:
+                        roopTime = 8;
+                        keepAliveTimer("はちかい繰り返します");
+                        break;
+                    case roopKeyword["nineStr"]:
+                        roopTime = 9;
+                        keepAliveTimer("きゅうかい繰り返します");
+                        break;
+                    case roopKeyword["tenStr"]:
+                        roopTime = 10;
+                        keepAliveTimer("じゅっかい繰り返します");
+                        break;
                     case commonKeyword["todayForecastStr"]://今日の天気は
                         todayForecast();
                         break;
@@ -236,6 +292,10 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["airStr"]://エアコンモード
                         commandMode = "air"
+                        keepAliveTimer(str + "に移行");
+                        break;
+                    case commonKeyword["roopStr"]:
+                        commandMode = "roop";
                         keepAliveTimer(str + "に移行");
                         break;
                     case commonKeyword["closeStr"]://操作終了
@@ -294,7 +354,11 @@ grammar.compile(function(err, result){
                         keepAliveTimer(str);
                         break;
                     case blueRayKeyword["downStr"]://したいどう
-                        irkitSignal(freq_list.down);
+                        for(var i = 0; i < roopTime; i+=1){
+                            sleep.sleep(1);
+                            irkitSignal(freq_list.down);
+                            keepAliveTimer("");
+                        }
                         keepAliveTimer(str);
                         break;
                     // case blueRayKeyword["rightStr"]://右移動
@@ -525,7 +589,7 @@ grammar.compile(function(err, result){
                         commandMode = "normal";
                         break;
                     case commonKeyword["wakeUpStr"]:
-                        blueClient.write('POWR1   \n');
+                        tvClient.write('POWR1   \n');
                         irkitSignal(freq_list.light);
                         setTimeout(function(){
                             irkitSignal(freq_list.light);
@@ -613,6 +677,7 @@ function speak(str){
 function close(){
     clearTimeout(timerId);
     commandMode = "done";
+    roopTime = 1;
     speak("受付を終了しました");
 
 }
