@@ -354,11 +354,7 @@ grammar.compile(function(err, result){
                         keepAliveTimer(str);
                         break;
                     case blueRayKeyword["downStr"]://したいどう
-                        for(var i = 0; i < roopTime; i+=1){
-                            sleep.sleep(1);
-                            irkitSignal(freq_list.down);
-                            keepAliveTimer("");
-                        }
+                        irkitSignal(freq_list.down);
                         keepAliveTimer(str);
                         break;
                     // case blueRayKeyword["rightStr"]://右移動
