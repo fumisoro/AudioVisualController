@@ -47,7 +47,6 @@ var commonKeyword = {
         offStr: "電源オフ",
         airStr: "エアコンモード",
         normalStr: "ノーマルモード",
-        roopStr: "ループモード",
         lightStr: "電気モード",
         changeStr: "切り換え",
         allStr: "すべての機器よ",
