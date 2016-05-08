@@ -236,42 +236,42 @@ grammar.compile(function(err, result){
             }
         }else if(commandMode == "normal"){
             switch (str){
-                    case roopKeyword["twoStr"]:
-                        roopTime = 2;
-                        keepAliveTimer("にかい繰り返します");
-                        break;
-                    case roopKeyword["threeStr"]:
-                        roopTime = 3;
-                        keepAliveTimer("さんかい繰り返します");
-                        break;
-                    case roopKeyword["fourStr"]:
-                        roopTime = 4;
-                        keepAliveTimer("よんかい繰り返します");
-                        break;
-                    case roopKeyword["fiveStr"]:
-                        roopTime = 5;
-                        keepAliveTimer("ごかい繰り返します");
-                        break;
-                    case roopKeyword["sixStr"]:
-                        roopTime = 6;
-                        keepAliveTimer("ろっかい繰り返します");
-                        break;
-                    case roopKeyword["sevenStr"]:
-                        roopTime = 7;
-                        keepAliveTimer("ななかい繰り返します");
-                        break;
-                    case roopKeyword["eigthStr"]:
-                        roopTime = 8;
-                        keepAliveTimer("はちかい繰り返します");
-                        break;
-                    case roopKeyword["nineStr"]:
-                        roopTime = 9;
-                        keepAliveTimer("きゅうかい繰り返します");
-                        break;
-                    case roopKeyword["tenStr"]:
-                        roopTime = 10;
-                        keepAliveTimer("じゅっかい繰り返します");
-                        break;
+                    // case roopKeyword["twoStr"]:
+                    //     roopTime = 2;
+                    //     keepAliveTimer("にかい繰り返します");
+                    //     break;
+                    // case roopKeyword["threeStr"]:
+                    //     roopTime = 3;
+                    //     keepAliveTimer("さんかい繰り返します");
+                    //     break;
+                    // case roopKeyword["fourStr"]:
+                    //     roopTime = 4;
+                    //     keepAliveTimer("よんかい繰り返します");
+                    //     break;
+                    // case roopKeyword["fiveStr"]:
+                    //     roopTime = 5;
+                    //     keepAliveTimer("ごかい繰り返します");
+                    //     break;
+                    // case roopKeyword["sixStr"]:
+                    //     roopTime = 6;
+                    //     keepAliveTimer("ろっかい繰り返します");
+                    //     break;
+                    // case roopKeyword["sevenStr"]:
+                    //     roopTime = 7;
+                    //     keepAliveTimer("ななかい繰り返します");
+                    //     break;
+                    // case roopKeyword["eigthStr"]:
+                    //     roopTime = 8;
+                    //     keepAliveTimer("はちかい繰り返します");
+                    //     break;
+                    // case roopKeyword["nineStr"]:
+                    //     roopTime = 9;
+                    //     keepAliveTimer("きゅうかい繰り返します");
+                    //     break;
+                    // case roopKeyword["tenStr"]:
+                    //     roopTime = 10;
+                    //     keepAliveTimer("じゅっかい繰り返します");
+                    //     break;
                     case commonKeyword["todayForecastStr"]://今日の天気は
                         todayForecast();
                         break;
@@ -293,10 +293,10 @@ grammar.compile(function(err, result){
                         commandMode = "air"
                         keepAliveTimer(str + "に移行");
                         break;
-                    case commonKeyword["roopStr"]:
-                        commandMode = "roop";
-                        keepAliveTimer(str + "に移行");
-                        break;
+                    // case commonKeyword["roopStr"]:
+                    //     commandMode = "roop";
+                    //     keepAliveTimer(str + "に移行");
+                    //     break;
                     case commonKeyword["closeStr"]://操作終了
                         close();
                         break;
