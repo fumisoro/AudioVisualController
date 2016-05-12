@@ -55,7 +55,8 @@ var commonKeyword = {
         reserveStr: "予約",
         goodMorningStr: "おはよう",
         timeNowStr: "いまなんじ",
-        todayForecastStr: "今日の天気は"
+        todayForecastStr: "今日の天気は",
+        tomorrowForecastStr: "明日の天気は"
     }
 
 var blueRayKeyword = {
@@ -273,7 +274,10 @@ grammar.compile(function(err, result){
                     //     keepAliveTimer("じゅっかい繰り返します");
                     //     break;
                     case commonKeyword["todayForecastStr"]://今日の天気は
-                        todayForecast();
+                        speakForecast("today");
+                        break;
+                    case commonKeyword["tomorrowForecastStr"]://明日の天気は
+                        speakForecast("tomorrow");
                         break;
                     case commonKeyword["timeNowStr"]://いまなんじ
                         timeNow();
@@ -607,14 +611,21 @@ grammar.compile(function(err, result){
     julius.start();
 })
 
-function todayForecast(){
-    speak("天気を取得します");
+function speakForecast(day){
     child = exec("curl 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'",
         {timeout: 9000},
         function(error, stdout, stderr){
             if(stdout){
-                var todayForecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][0];
-                speak("今日の天気は"+todayForecast["telop"]+"です。");
+                var forecast, dayOption = {today: "今日", tomorrow: "明日"};
+                if (day == "today"){
+                    forecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][0];
+                }else if (day == "tomorrow"){
+                    forecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][1];
+                }else if (day == "dayAfterTomorrow"){
+                    forecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][2];
+                }
+
+                speak(dayOption[day]+"の天気は"+forecast["telop"]+"です。");
                 keepAliveTimer("");
             }
             if(error !== null) {
