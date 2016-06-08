@@ -18,7 +18,7 @@
 17	[ノーマルモード]	n o: m a r u m o: d o
 18	[電気モード]	d e N k i m o: d o
 19	[切り換え]	k i r i k a e
-20	[すべての機器よ]	s u b e t e n o k i k i y o
+20	[みなのもの]	m i n a n o m o n o
 21	[静まれ]	sh i z u m a r e
 22	[目覚めよ]	m e z a m e y o
 23	[予約]	y o y a k u
@@ -26,7 +26,7 @@
 25	[いまなんじ]	i m a n a N j i
 26	[今日の天気は]	ky o: n o t e N k i w a
 27	[明日の天気は]	a sh i t a n o t e N k i w a
-28	[ブルーレイモード]	b u r u: r e: m o: d o
+28	[レコーダー]	r e k o: d a:
 29	[つぎチャプター]	ts u g i ch a p u t a:
 30	[まえチャプター]	m a e ch a p u t a:
 31	[再生終了]	s a i s e: sh u: ry o:
@@ -38,7 +38,7 @@
 37	[うえいどう]	u e: d o:
 38	[したいどう]	sh i t a i d o:
 39	[もどる操作]	m o d o r u s o: s a
-40	[テレビモード]	t e r e b i m o: d o
+40	[てれび]	t e r e b i
 41	[チャンネルつぎ]	ch a N n e r u ts u g i
 42	[チャンネルまえ]	ch a N n e r u m a e
 43	[音量だい]	o N ry o: d a i

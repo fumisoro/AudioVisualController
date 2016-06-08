@@ -63,7 +63,7 @@ var commonKeyword = {
         normalStr: "ノーマルモード",
         lightStr: "電気モード",
         changeStr: "切り換え",
-        allStr: "すべての機器よ",
+        allStr: "みなのもの",
         silenceStr: "静まれ",
         wakeUpStr: "目覚めよ",
         reserveStr: "予約",
@@ -74,7 +74,7 @@ var commonKeyword = {
     }
 
 var blueRayKeyword = {
-        blueRayStr: "ブルーレイモード",
+        blueRayStr: "レコーダー",
         chapterNextStr: "つぎチャプター",
         chapterBeforeStr: "まえチャプター",
         endPlayStr: "再生終了",
@@ -89,7 +89,7 @@ var blueRayKeyword = {
     }
 
 var tvKeyword = {
-        tvStr: "テレビモード",
+        tvStr: "てれび",
         channelNextStr: "チャンネルつぎ",
         channelBeforeStr: "チャンネルまえ",
         volumeUpStr: "音量だい",
@@ -246,7 +246,7 @@ grammar.compile(function(err, result){
             switch (str){
                 case commonKeyword["startStr"]:
                     commandMode = "normal";
-                    keepAliveTimer("コマンドを受け付けます")
+                    keepAliveTimer("なに？")
                     break;
             }
         }else if(commandMode == "normal"){
@@ -305,26 +305,26 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["lightStr"]://電気モード
                         commandMode = "light";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["airStr"]://エアコンモード
                         commandMode = "air"
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     // case commonKeyword["roopStr"]:
                     //     commandMode = "roop";
-                    //     keepAliveTimer(str + "に移行");
+                    //     keepAliveTimer(str);
                     //     break;
                     case commonKeyword["closeStr"]://操作終了
                         close();
                         break;
                     case blueRayKeyword["blueRayStr"]://ブルーレイモード
                         commandMode = "powerBluRay";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["tvStr"]://テレビモード
                         commandMode = "powerTv";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case blueRayKeyword["chapterNextStr"]://チャプターつぎ
                         blueClient.write('DSKF    \n');
@@ -418,7 +418,7 @@ grammar.compile(function(err, result){
                         keepAliveTimer(str);
                         break;
                     default:
-                        keepAliveTimer("もう一度お願いします");
+                        keepAliveTimer("ん？");
                 }
             } else if(commandMode == "powerBluRay"){
                 switch(str){
@@ -434,26 +434,26 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
-                        keepAliveTimer(str+"に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["lightStr"]://電気モード
                         commandMode = "light";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["airStr"]://エアコンモード
                         commandMode = "air"
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["closeStr"]://操作終了
                         close();
                         break;
                     case blueRayKeyword["blueRayStr"]://ブルーレイモード
                         commandMode = "powerBluRay";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["tvStr"]://テレビモード
                         commandMode = "powerTv";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                 }
             } else if(commandMode == "powerTv"){
@@ -470,29 +470,29 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
-                        keepAliveTimer(str+"に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["lightStr"]://電気モード
                         commandMode = "light";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["airStr"]://エアコンモード
                         commandMode = "air"
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["closeStr"]://操作終了
                         close();
                         break;
                     case blueRayKeyword["blueRayStr"]://ブルーレイモード
                         commandMode = "powerBluRay";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["tvStr"]://テレビモード
                         commandMode = "powerTv";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     default:
-                        keepAliveTimer("もう一度お願いします");
+                        keepAliveTimer("ん？");
                 }
             } else if(commandMode == "air"){
                 switch(str){
@@ -513,29 +513,29 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
-                        keepAliveTimer(str+"に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["lightStr"]://電気モード
                         commandMode = "light";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["airStr"]://エアコンモード
                         commandMode = "air"
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["closeStr"]://操作終了
                         close();
                         break;
                     case blueRayKeyword["blueRayStr"]://ブルーレイモード
                         commandMode = "powerBluRay";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["tvStr"]://テレビモード
                         commandMode = "powerTv";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     default:
-                        keepAliveTimer("もう一度お願いします");
+                        keepAliveTimer("ん？");
                 }
             } else if(commandMode == "light"){
                 switch(str){
@@ -564,29 +564,29 @@ grammar.compile(function(err, result){
                         break;
                     case commonKeyword["normalStr"]://ノーマルモード
                         commandMode = "normal"
-                        keepAliveTimer(str+"に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["lightStr"]://電気モード
                         commandMode = "light";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["airStr"]://エアコンモード
                         commandMode = "air"
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case commonKeyword["closeStr"]://操作終了
                         close();
                         break;
                     case blueRayKeyword["blueRayStr"]://ブルーレイモード
                         commandMode = "powerBluRay";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     case tvKeyword["tvStr"]://テレビモード
                         commandMode = "powerTv";
-                        keepAliveTimer(str + "に移行");
+                        keepAliveTimer(str);
                         break;
                     default:
-                        keepAliveTimer("もう一度お願いします");
+                        keepAliveTimer("ん？");
                 }
             } else if(commandMode == "all"){
                 switch(str){
@@ -657,7 +657,8 @@ function morningGreeting(){
                 var todayForecast = JSON.parse(unescapeUnicode(stdout))["forecasts"][0];
                 var time = getNow();
 
-                speak("おはようございます。今日は"+time.month+"月"+time.day+"日"+time.week+"曜日です。今の時刻は"+time.hour+"時"+time.minute+"分"+time.second+"秒です。天気は"+todayForecast["telop"]+"です。");
+                // speak("おはようございます。今日は"+time.month+"月"+time.day+"日"+time.week+"曜日です。今の時刻は"+time.hour+"時"+time.minute+"分"+time.second+"秒です。天気は"+todayForecast["telop"]+"です。");
+                speak("おはようございます。");
                 keepAliveTimer("");
                 setTimeout(function(){
                     keepAliveTimer("");
@@ -685,7 +686,7 @@ function irkitSignal(freq){
                 // speak("成功しました");
             }
             if(error !== null) {
-               speak("赤外線の送信に失敗しました");
+               speak("ミスった");
             }
         });
 }
@@ -698,7 +699,7 @@ function close(){
     clearTimeout(timerId);
     commandMode = "done";
     roopTime = 1;
-    speak("受付を終了しました");
+    speak("おわり");
 
 }
 
