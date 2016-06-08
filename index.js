@@ -14,15 +14,29 @@ var Julius = require('julius'),
 var options = {
     uri: 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=6554684f74434d776d6452446d5a415552384e45646a635a6663747538383365774a762f705452514e6337',
     body: {
-        "utt": "こんにちは"
+        "utt": "今日も疲れたよ",
+        "context": "",
+        "nickname": "光",
+        "nickname_y": "ヒカリ",
+        "sex": "女",
+        "bloodtype": "B",
+        "birthdateY": "1997",
+        "birthdateM": "5",
+        "birthdateD": "30",
+        "age": "16",
+        "constellations": "双子座",
+        "place": "東京",
+        "mode": "dialog"
     },
     json: true
 };
 
 request.post(options, function(error, response, body){
   if (!error && response.statusCode == 200) {
-    console.log(body.name);
+    console.log("ドコモとお話！");
+    console.log(body);
   } else {
+    console.log("ドコモとお話失敗だ...");
     console.log (response);
     console.log('error: '+ response.statusCode);
   }
@@ -87,22 +101,22 @@ var tvKeyword = {
 
 __.each(roopKeyword, function(value, key){
     grammar.add(roopKeyword[key]);
-    console.log(roopKeyword[key]);
+    // console.log(roopKeyword[key]);
 })
 
 __.each(commonKeyword, function(value, key){
     grammar.add(commonKeyword[key]);
-    console.log(commonKeyword[key]);
+    // console.log(commonKeyword[key]);
 });
 
 __.each(blueRayKeyword, function(value, key){
     grammar.add(blueRayKeyword[key]);
-    console.log(blueRayKeyword[key]);
+    // console.log(blueRayKeyword[key]);
 });
 
 __.each(tvKeyword, function(value, key){
     grammar.add(tvKeyword[key]);
-    console.log(tvKeyword[key]);
+    // console.log(tvKeyword[key]);
 });
 
 var volume = 20;
