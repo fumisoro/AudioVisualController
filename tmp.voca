@@ -5,92 +5,74 @@
 % NOISE
 <sp>	sp
 % WORD_0
-にかいループ	 n i k a i r u: p u
-% WORD_1
-さんかいループ	 s a N k a i r u: p u
-% WORD_2
-よんかいループ	 y o N k a i r u: p u
-% WORD_3
-ごかいループ	 g o k a i r u: p u
-% WORD_4
-ろっかいループ	 r o q k a i r u: p u
-% WORD_5
-ななかいループ	 n a n a k a i r u: p u
-% WORD_6
-はちかいループ	 w a ch i k a i r u: p u
-% WORD_7
-きゅうかいループ	 ky u: k a i r u: p u
-% WORD_8
-じゅっかいループ	 j u q k a i r u: p u
-% WORD_9
 へいマイク	 e: m a i k u
-% WORD_10
+% WORD_1
 操作終了	 s o: s a sh u: ry o:
-% WORD_11
+% WORD_2
 起動	 k i d o:
-% WORD_12
+% WORD_3
 電源オフ	 d e N g e N o f u
-% WORD_13
-エアコンモード	 e a k o N m o: d o
-% WORD_14
+% WORD_4
+エアコン	 e a k o N
+% WORD_5
 ノーマルモード	 n o: m a r u m o: d o
-% WORD_15
+% WORD_6
 電気モード	 d e N k i m o: d o
-% WORD_16
+% WORD_7
 切り換え	 k i r i k a e
-% WORD_17
+% WORD_8
 みなのもの	 m i n a n o m o n o
-% WORD_18
+% WORD_9
 静まれ	 sh i z u m a r e
-% WORD_19
+% WORD_10
 目覚めよ	 m e z a m e y o
-% WORD_20
+% WORD_11
 予約	 y o y a k u
-% WORD_21
+% WORD_12
 おはよう	 o h a y o:
-% WORD_22
+% WORD_13
 いまなんじ	 i m a n a N j i
-% WORD_23
+% WORD_14
 今日の天気は	 ky o: n o t e N k i w a
-% WORD_24
+% WORD_15
 明日の天気は	 a sh i t a n o t e N k i w a
-% WORD_25
+% WORD_16
 レコーダー	 r e k o: d a:
-% WORD_26
+% WORD_17
 つぎチャプター	 ts u g i ch a p u t a:
-% WORD_27
+% WORD_18
 まえチャプター	 m a e ch a p u t a:
-% WORD_28
+% WORD_19
 再生終了	 s a i s e: sh u: ry o:
-% WORD_29
+% WORD_20
 再生	 s a i s e:
-% WORD_30
+% WORD_21
 早送り	 h a y a o k u r i
-% WORD_31
+% WORD_22
 巻き戻し	 m a k i m o d o sh i
-% WORD_32
+% WORD_23
 停止	 t e: sh i
-% WORD_33
+% WORD_24
 録画リスト	 r o k u g a r i s u t o
-% WORD_34
+% WORD_25
 うえいどう	 u e: d o:
-% WORD_35
+% WORD_26
 したいどう	 sh i t a i d o:
-% WORD_36
+% WORD_27
 もどる操作	 m o d o r u s o: s a
-% WORD_37
+% WORD_28
 てれび	 t e r e b i
-% WORD_38
+% WORD_29
 チャンネルつぎ	 ch a N n e r u ts u g i
-% WORD_39
+% WORD_30
 チャンネルまえ	 ch a N n e r u m a e
-% WORD_40
+% WORD_31
 音量だい	 o N ry o: d a i
-% WORD_41
+% WORD_32
 音量しょう	 o N ry o: sh o:
-% WORD_42
+% WORD_33
 入力切り換え	 ny u: ry o k u k i r i k a e
-% WORD_43
+% WORD_34
 うぃーゆー	 w i: y u:
-% WORD_44
+% WORD_35
 ぴーえすふぉー	 p i: e s u f o:

@@ -15,6 +15,17 @@ var Julius = require('julius'),
 
 var webhookUri = secret.slackWebHookUri;
 
+slack = new Slack();
+slack.setWebhook(webhookUri);
+
+slack.webhook({
+  channel: "#general",
+  username: "webhookbot",
+  text: "This is posted to #general and comes from a bot named webhookbot."
+}, function(err, response) {
+  console.log(response);
+});
+
 var options = {
     uri: 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=6554684f74434d776d6452446d5a415552384e45646a635a6663747538383365774a762f705452514e6337',
     body: {
@@ -64,8 +75,8 @@ var commonKeyword = {
         onStr: "起動",
         offStr: "電源オフ",
         airStr: "エアコン",
-        normalStr: "ノーマル",
-        lightStr: "電気",
+        normalStr: "ノーマルモード",
+        lightStr: "電気モード",
         changeStr: "切り換え",
         allStr: "みなのもの",
         silenceStr: "静まれ",
@@ -103,10 +114,10 @@ var tvKeyword = {
         ps4Str: "ぴーえすふぉー"
     }
 
-__.each(roopKeyword, function(value, key){
-    grammar.add(roopKeyword[key]);
-    // console.log(roopKeyword[key]);
-})
+// __.each(roopKeyword, function(value, key){
+//     grammar.add(roopKeyword[key]);
+//     console.log(roopKeyword[key]);
+// })
 
 __.each(commonKeyword, function(value, key){
     grammar.add(commonKeyword[key]);
