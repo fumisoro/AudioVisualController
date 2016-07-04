@@ -7,27 +7,42 @@ var Julius = require('julius'),
     freq_list = require('./freq_list'),
     secret = require('./secret'),
     sleep = require('sleep'),
-    Slack = require('slack-node'),
+    Slack = require('@slack/client').RtmClient,
     child,
     timerId,
     commandMode = "done",
     roopTime = 1;
 
-var webhookUri = secret.slackWebHookUri;
+var slackToken = secret.slackToken,
+    autoReconnect = true,
+    autoMark = true,
+    slack = new Slack(slackToken, autoReconnect, autoMark);
 
-slack = new Slack();
-slack.setWebhook(webhookUri);
-
-slack.webhook({
-  channel: "#general",
-  username: "webhookbot",
-  text: "This is posted to #general and comes from a bot named webhookbot."
-}, function(err, response) {
-  console.log(response);
+slack.on('open', function() {
+    console.log('open');
 });
 
+/**
+ * 投稿された時
+ */
+slack.on('message', function(message) {
+    text = message["text"];
+    if (/エアコン/.test(text)){
+        if (/消/.test(text)){
+            irkitSignal(freq_list.airOff);
+        }else if(/冷房/.test(text)){
+            irkitSignal(freq_list.coolAirOn);
+        }else if(/つけて/.test(text)){
+            irkitSignal(freq_list.coolAirOn);
+        }
+    }
+    console.log(text);
+});
+
+slack.login();
+
 var options = {
-    uri: 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=6554684f74434d776d6452446d5a415552384e45646a635a6663747538383365774a762f705452514e6337',
+    uri: secret.docomoUri,
     body: {
         "utt": "今日も疲れたよ",
         "context": "",
@@ -74,7 +89,7 @@ var commonKeyword = {
         closeStr: "操作終了",
         onStr: "起動",
         offStr: "電源オフ",
-        airStr: "エアコン",
+        airStr: "エアコンモード",
         normalStr: "ノーマルモード",
         lightStr: "電気モード",
         changeStr: "切り換え",
