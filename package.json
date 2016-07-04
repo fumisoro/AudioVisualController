@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/fumisoro/AudioVisualController#readme",
   "dependencies": {
+    "@slack/client": "^3.5.0",
     "express": "^4.13.4"
   }
 }
