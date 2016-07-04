@@ -5,11 +5,15 @@ var Julius = require('julius'),
     request = require('request'),
     exec = require('child_process').exec,
     freq_list = require('./freq_list'),
+    secret = require('./secret'),
     sleep = require('sleep'),
+    Slack = require('slack-node'),
     child,
     timerId,
     commandMode = "done",
     roopTime = 1;
+
+var webhookUri = secret.slackWebHookUri;
 
 var options = {
     uri: 'https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=6554684f74434d776d6452446d5a415552384e45646a635a6663747538383365774a762f705452514e6337',
@@ -59,9 +63,9 @@ var commonKeyword = {
         closeStr: "操作終了",
         onStr: "起動",
         offStr: "電源オフ",
-        airStr: "エアコンモード",
-        normalStr: "ノーマルモード",
-        lightStr: "電気モード",
+        airStr: "エアコン",
+        normalStr: "ノーマル",
+        lightStr: "電気",
         changeStr: "切り換え",
         allStr: "みなのもの",
         silenceStr: "静まれ",
@@ -497,7 +501,7 @@ grammar.compile(function(err, result){
             } else if(commandMode == "air"){
                 switch(str){
                     case commonKeyword["onStr"]://起動
-                        irkitSignal(freq_list.airOn);
+                        irkitSignal(freq_list.coolAirOn);
                         keepAliveTimer(str);
                         commandMode = "normal"
                         break;
