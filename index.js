@@ -30,13 +30,18 @@ slack.on('message', function(message) {
     if (/エアコン/.test(text)){
         if (/消/.test(text)){
             irkitSignal(freq_list.airOff);
+            slack.sendMessage("消した！！", "G1NJGV282");
         }else if(/冷房/.test(text)){
             irkitSignal(freq_list.coolAirOn);
+            slack.sendMessage("冷房つけた！！", "G1NJGV282");
+            slack.sendMessage("はよ帰ってこーい( ｣ﾟДﾟ)｣ｵｰｲ!", "G1NJGV282");
         }else if(/つけて/.test(text)){
             irkitSignal(freq_list.coolAirOn);
+            slack.sendMessage("冷房つけた！！", "G1NJGV282");
+            slack.sendMessage("はよ帰ってこーい( ｣ﾟДﾟ)｣ｵｰｲ!", "G1NJGV282");
         }
     }
-    console.log(text);
+    console.log(message);
 });
 
 slack.login();
